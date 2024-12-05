@@ -18,3 +18,22 @@
 .no-scroll {
 	overflow-y: hidden;
 }
+
+.title{
+	position: relative;
+    color: #fff;
+    font-size: 48px;
+    line-height: 58px;
+    padding-bottom: 15px;
+    text-align: center;
+    &::before{
+        content: '';
+        position: absolute;
+        width: 55px;
+        height: 5px;
+        background: linear-gradient(to right, #55B4D4 0%, #5758E0 100%);
+		bottom: 0;
+		left: 50%; 
+        transform: translateX(-50%); 
+    }
+}
