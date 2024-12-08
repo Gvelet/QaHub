@@ -128,4 +128,7 @@
     &__content-offers span{
         font-weight: 700;
     }
+    &__content-link:hover{
+        text-decoration: underline;
+    }
 }
