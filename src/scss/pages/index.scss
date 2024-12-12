@@ -22,6 +22,7 @@
         margin-bottom: 50px;
     }
     &__content-btn {
+        scroll-behavior: smooth;
         background-color: #fff;
         color: #000;
         border: none;
@@ -132,3 +133,93 @@
         text-decoration: underline;
     }
 }
+
+.popular{
+    background-color: #111111;
+    padding-bottom: 60px;
+    padding-top: 70px;
+    &__content{
+        margin-bottom: 40px;
+    }
+    &__content-title{
+        margin-bottom: 25px;
+    }
+    &__content-text{
+        text-align: center;
+        max-width: 575px;
+        margin: 0 auto;
+    }
+}
+
+.resources{
+    background-color: #000;
+    &__inner{
+        padding: 70px 10px 90px;
+    }
+    &__content{
+        margin-bottom: 30px;
+    }
+    &__spoilers{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    &__spoilers-item{
+        background-color: #191919;
+        border-radius: 5px;
+        position: relative;
+    }
+    &__spoilers-item.show::after{
+        content: '';
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #5758E0;
+    }
+    &__spoilers-title{
+        padding: 20px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        font-size: 24px;
+    }
+    &-plus{
+        font-size: 30px;
+    }
+    &__spoilers-text{
+        background-color: #000;
+        padding-top: 10px;
+        padding-left: 10px;
+        max-height: 0;
+        overflow: hidden; 
+        opacity: 0; 
+        transition: max-height 0.5s ease, opacity 0.5s ease;
+    }
+    &__spoilers-text p:not(:last-child){
+        padding-bottom: 20px;
+    }
+    &__spoilers-text.show{
+        max-height: 200px; 
+        opacity: 1;
+    }
+}
+
+.blog{
+    background-color: #111111;
+    padding-bottom: 60px;
+    padding-top: 70px;
+    &__content{
+        margin-bottom: 40px;
+    }
+    &__content-title{
+        margin-bottom: 25px;
+    }
+    &__content-text{
+        text-align: center;
+        max-width: 575px;
+        margin: 0 auto;
+    }
+}
+

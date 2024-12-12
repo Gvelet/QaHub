@@ -1,13 +1,20 @@
+/* libs */
+
 /* Base */
-@import "./base/reset";
-@import "./base/vars";
-@import "./base/base";
-@import "./base/utils";
-@import "./base/containers";
-@import "./base/sticky-footer";
+@import "./base/_reset";
+@import "./base/_vars";
+@import "./base/_base";
+@import "./base/_utils";
+@import "./base/_containers";
+@import "./base/_sticky-footer";
+
+@import "../../node_modules/swiper/swiper-bundle";
 
 /* Blocks */
 @import "./blocks/*.scss";
 
 /* Pages */
 @import "./pages/*.scss";
+
+
+

@@ -4,6 +4,12 @@
 	margin: 0 auto;
 }
 
+.container-mini{
+	padding: 0 var(--container-mini-padding);
+	max-width: var(--container-mini-width);
+	margin: 0 auto;
+}
+
 .container-right {
 	/* overflow-x: hidden; */
 	padding-left: calc(
