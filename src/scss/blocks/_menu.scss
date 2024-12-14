@@ -21,7 +21,7 @@
     &__social-item svg path{
         transition: fill 0.3s;
     }
-    &__social-item svg path:hover{
+    &__social-item:hover svg path{
         fill: #55B4D4;
 	}
 }

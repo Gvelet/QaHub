@@ -19,6 +19,11 @@
 	overflow-y: hidden;
 }
 
+.transform-Rotate45{
+	transform: rotate(45deg);
+	transition: transform 0.3s;
+}
+
 .title{
 	position: relative;
     color: #fff;

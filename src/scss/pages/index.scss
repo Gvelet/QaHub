@@ -59,6 +59,7 @@
         margin-top: 30px;
     }
     &__item{
+        position: relative;
         background-color: #191919;
         max-width: 372px;
     }
@@ -79,7 +80,7 @@
     }
     &__item-content{
         text-align: center;
-        padding: 30px 20px 30px;
+        padding: 30px 20px 60px;
     }
     &__item-icon{
         margin-bottom: 15px;
@@ -91,6 +92,12 @@
     }
     &__item-text{
         margin-bottom: 25px;
+    }
+    &__item-arrow{
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        right: 0;
     }
 }
 
@@ -187,6 +194,7 @@
     }
     &-plus{
         font-size: 30px;
+        transition: transform 0.3s; 
     }
     &__spoilers-text{
         background-color: #000;
