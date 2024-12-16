@@ -4,7 +4,7 @@ const config = {
 		index: './src/js/index.js',
 		allinstruments: './src/js/allinstruments.js',
 		dataAnalysis: './src//js/dataAnalysis.js',
-		// carousel: './node_modules/slick-carousel/slick/slick.js',
+		photoResolution: './src/js/photoResolution.js'
 		// jQuery: './node_modules/jquery/dist/jquery.min.js'
 	},
 	output: {
