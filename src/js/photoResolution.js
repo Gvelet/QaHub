@@ -5,8 +5,10 @@ const closeButton = document.getElementById('closeButton');
 const selectResized = document.querySelector('.resized__select');
 const initialSizeImg = document.querySelector('.resized__initial-size');
 const newSizeImg = document.querySelector('.resized__new-size');
-const selectedImage = document.querySelector('#resized-img');
+let selectedImage;
+const containerImg = document.querySelector('.resized-wrapper-img');
 const format = 'image/jpeg';
+
 
 const imageSizes = {
     'black': 3.92,
@@ -15,6 +17,7 @@ const imageSizes = {
 };
 
 const resetFileInput = () => {
+    containerImg.textContent = '';
     fileInput.value = ''; 
     fileNameInput.value = 'Файл не выбран'; 
 };
@@ -29,12 +32,24 @@ const updateFileName = () => {
 };
 
 const displayPicture = (src) => {
-    selectedImage.src = src;
+    if (selectedImage) {
+        selectedImage.remove(); // Удаляем предыдущее изображение, если оно существует
+    }
+    
+    selectedImage = document.createElement('img'); 
+    selectedImage.src = src; 
+    selectedImage.classList.add('resized-img'); 
+    containerImg.insertBefore(selectedImage, containerImg.firstElementChild);
 };
+
+
+
+displayPicture(`./img/${selectResized.value}.jpg`)
 
 const loadFile = (file) => {
     const reader = new FileReader();
     reader.onload = (e) => {
+        containerImg.textContent = '';
         displayPicture(e.target.result);
         updateInitialSize(file.size / 1000);
     };
