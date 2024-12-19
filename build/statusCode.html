@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Поменять разрешение фото</title>
+		<title>Узнать статус код</title>
 		<link type="image/x-icon" href="./img/bugFavicon.ico" rel="shortcut icon">
 		<link type="Image/x-icon" href="./img/bugFavicon.ico" rel="icon">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -69,66 +69,42 @@
     </div>
 </header>
 
+
         <main class="main">
-            <section class="resized">
-                <div class="container">
-                    <div class="resized__inner">
-                        <div class="resized__content">
-                            <h2 class="resized__title title">Поменять разрешение фото</h2>
-                            <p class="resized__text">С помощью этого инструмента, вы можете поменять размер своей фотографии на любой желающий. Поддерживаемый формат изображений: PNG, Jpeg, WEbP, GIF</p>
+			<section class="statuses">
+				<div class="container">
+					<div class="statuses__inner">
+						<div class="statuses__content">
+                            <h2 class="statuses__title title">Узнать статус код</h2>
+                            <p class="statuses__text">С помощью поиска ниже вы можете быстро найти любой статус-код. Введите, например, 200 и нажмите «Показать», чтобы прочитать информацию о статус-коде 200, или выберите нужный статус-код из списка.</p>
                         </div>
 
-                        <div class="resized__wpapper">
-                            <div class="resized__functional">
-                                <h4 class="resized__functional-title">Выбрать фото</h4>
-                                <div class="resized__select-upload">
-                                    <label class="resized__upload-label" for="resizedSelectUpload">Выбрать фотографию из списка</label>
-                                    <select class="resized__select" id="resizedSelectUpload">
-                                        <option value="black">Черный экран</option>
-                                        <option value="dog">Собака</option>
-                                        <option value="forest">Природа</option>
-                                    </select>
-                                </div>
+						<div class="statuses__wrapper">
+							<div class="statuses__wrapper-input">
+								<input class="statuses__input" type="number" id="statuses__wrapper-input" placeholder="Введите статус-код">
+								<button class="statuses__wrapper-submit">Показать</button>
+							</div>
+							<div class="statuses__wrapper-selects">
+								<select class="statuses__selects-groups" id="statusesSelectGroups">
+									<option value="1">1xx</option>
+									<option value="2">2xx</option>
+									<option value="3">3xx</option>
+									<option value="4">4xx</option>
+									<option value="5">5xx</option>
+								</select>
 
-                                <div class="resized__file-upload">
-                                    <label class="resized__upload-label" for="resizedFileLabel">Загрузите свою фотографию</label>
-
-                                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
-                                    <button class="resized__file-choose" id="fileButton">Выберите файл...</button>
-                                    <input type="text" class="resized__file-input" id="fileName" value="Файл не выбран" readonly>
-                                    <button class="resized__file-btn resized__file-close" id="closeButton">X</button>
-                                </div>
-
-                                <div class="resized__upload-dimensions">
-                                    <h4 class="resized__dimensions-title">Установить ширину и высоту</h4>
-                                    <div class="resized__dimensions-inner">
-                                        <div class="resized__upload-item">
-                                            <label class="resized__upload-label" for="resizedWidth">Ширина</label>
-                                            <input class="resized__dimensions-input" type="number" id="resizedWidth" value="350">
-                                        </div>
-                                        <div class="resized__upload-item">
-                                            <label class="resized__upload-label" for="resizedHeight">Высота</label>
-                                            <input class="resized__dimensions-input" type="number" id="resizedHeight" value="350">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="resized__upload-download">
-                                    <button id="downloadButton" class="resized__upload-button">Скачать с новым разрешением</button>
-                                    <div class="resized__new-size">Новый вес: -</div>
-                                </div>
-
-
+								<select class="statuses__selects-codes" id="statusesSelectCodes">
+									<option value="" disabled selected>Выберите статус код</option>
+								</select>
                             </div>
-                            <div class="resized__wrapper-images" id="resized-image">
-                                <div class="resized__image-text">Выбранная фотография</div>
-                                <div class="resized-wrapper-img">
-                                </div>
-                                <div class="resized__initial-size">Изначальный вес: </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+						</div>
+					</div>
+
+						
+						<div class="statuses__info" id="statuses__info"></div>
+					</div>
+				</div>
+			</section>
         </main>
 
         <footer class="footer">
@@ -190,6 +166,6 @@
 </footer>
 
 
-        <script src="./js/photoResolution.bundle.js"></script>
+        <script src="./js/statusCode.bundle.js"></script>
     </body>
 </html>

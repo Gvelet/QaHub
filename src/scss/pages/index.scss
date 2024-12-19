@@ -438,7 +438,7 @@
         width: 200px;
     }
     &__file-close{
-        background-color: #607D8B; /* Красный цвет для кнопки закрытия */
+        background-color: #607D8B; 
         color: white;
         padding: 10px 15px;
         border-radius: 0 8px 8px 0;
@@ -506,3 +506,77 @@
         color: #fff;
     }
 }
+
+// Statuses
+.statuses{
+    padding-top: 70px;
+    padding-bottom: 90px;
+    &__content{
+        padding-bottom: 80px;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    &__title{
+        margin-bottom: 20px;
+    }
+    &__text{
+        font-size: 20px;
+        text-align: center;
+    }
+    &__wrapper{
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 30px;
+    }
+    &__wrapper-input{
+        display: flex;
+    }
+    &__input{
+        background-color: #ffffff;
+        color: #000;
+        border-radius: 8px;
+        width: 215px;
+        padding: 13px 5px;
+    }
+    &__wrapper-submit{
+        background-color: #999999;
+        padding: 13px 37px;
+        color: #fff;
+        border-radius: 8px;
+        text-align: center;
+        margin-left: 4px;
+        transition: all .3s;
+    }
+    &__wrapper-submit:hover{
+        background-color: #55B4D4;
+    }
+    &__wrapper-selects{
+        display: flex;
+        gap: 15px;
+    }
+    &__selects-groups,
+    &__selects-codes{
+        background-color: #ffffff;
+        border-radius: 8px;
+        font-size: 14px;
+        line-height: 16px;
+        font-weight: 400;
+        color: #000000;
+        padding: 8px 5px;
+        cursor: pointer;
+    }
+    &__selects-codes{
+        width: 200px;
+    }
+    &__info{
+        max-width: 980px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    &__info-title{
+        font-size: 24px;
+        color: #fff;
+        margin-bottom: 10px;
+    }
+}
+

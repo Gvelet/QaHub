@@ -5,9 +5,10 @@ const closeButton = document.getElementById('closeButton');
 const selectResized = document.querySelector('.resized__select');
 const initialSizeImg = document.querySelector('.resized__initial-size');
 const newSizeImg = document.querySelector('.resized__new-size');
-let selectedImage;
 const containerImg = document.querySelector('.resized-wrapper-img');
-const format = 'image/jpeg';
+
+let selectedImage;
+const IMAGE_FORMAT = 'image/jpeg';
 
 
 const imageSizes = {
@@ -33,7 +34,7 @@ const updateFileName = () => {
 
 const displayPicture = (src) => {
     if (selectedImage) {
-        selectedImage.remove(); // Удаляем предыдущее изображение, если оно существует
+        selectedImage.remove();
     }
     
     selectedImage = document.createElement('img'); 
@@ -102,7 +103,7 @@ const downloadResizedImage = () => {
     a.download = 'resized_image';
     document.body.appendChild(a);
     a.click();
-    document.body.removeChild(a); // Удаляем элемент после скачивания
+    document.body.removeChild(a); 
 };
 
 updateInitialSize(imageSizes.black);

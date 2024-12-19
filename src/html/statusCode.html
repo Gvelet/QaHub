@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Узнать статус код</title>
+		<link type="image/x-icon" href="./img/bugFavicon.ico" rel="shortcut icon">
+		<link type="Image/x-icon" href="./img/bugFavicon.ico" rel="icon">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="./css/main.css" />
+	</head>
+    <body>
+        @@include('blocks/header.html')
+
+        <main class="main">
+			<section class="statuses">
+				<div class="container">
+					<div class="statuses__inner">
+						<div class="statuses__content">
+                            <h2 class="statuses__title title">Узнать статус код</h2>
+                            <p class="statuses__text">С помощью поиска ниже вы можете быстро найти любой статус-код. Введите, например, 200 и нажмите «Показать», чтобы прочитать информацию о статус-коде 200, или выберите нужный статус-код из списка.</p>
+                        </div>
+
+						<div class="statuses__wrapper">
+							<div class="statuses__wrapper-input">
+								<input class="statuses__input" type="number" id="statuses__wrapper-input" placeholder="Введите статус-код">
+								<button class="statuses__wrapper-submit">Показать</button>
+							</div>
+							<div class="statuses__wrapper-selects">
+								<select class="statuses__selects-groups" id="statusesSelectGroups">
+									<option value="1">1xx</option>
+									<option value="2">2xx</option>
+									<option value="3">3xx</option>
+									<option value="4">4xx</option>
+									<option value="5">5xx</option>
+								</select>
+
+								<select class="statuses__selects-codes" id="statusesSelectCodes">
+									<option value="" disabled selected>Выберите статус код</option>
+								</select>
+                            </div>
+						</div>
+					</div>
+
+						
+						<div class="statuses__info" id="statuses__info"></div>
+					</div>
+				</div>
+			</section>
+        </main>
+
+        @@include('blocks/footer.html')
+
+        <script src="./js/statusCode.bundle.js"></script>
+    </body>
+</html>
