@@ -87,11 +87,11 @@ const resizeImage = () => {
     canvas.height = heightInput;
 
     ctx.drawImage(selectedImage, 0, 0, widthInput, heightInput);
-    const url = canvas.toDataURL(format);
+    const url = canvas.toDataURL(IMAGE_FORMAT);
 
     canvas.toBlob((blob) => {
         newSizeImg.innerHTML = `Новый вес: ≈ ${blob.size / 1000} кб`;
-    }, format);
+    }, IMAGE_FORMAT);
 
     return url;
 };
