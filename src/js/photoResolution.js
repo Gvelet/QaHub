@@ -8,7 +8,7 @@ const newSizeImg = document.querySelector('.resized__new-size');
 const containerImg = document.querySelector('.resized-wrapper-img');
 
 let selectedImage;
-const IMAGE_FORMAT = 'image/jpeg';
+let image_format = 'image/jpeg';
 
 
 const imageSizes = {
@@ -53,6 +53,7 @@ const loadFile = (file) => {
         containerImg.textContent = '';
         displayPicture(e.target.result);
         updateInitialSize(file.size / 1000);
+        image_format = file.type; 
     };
     reader.readAsDataURL(file);
 };
@@ -69,6 +70,7 @@ const handleSelectChange = () => {
     updateInitialSize(imageSizes[selectedValue]);
     resetFileInput();
     displayPicture(selectingPicture());
+    image_format = 'image/jpeg'
 };
 
 const selectingPicture = () => {
@@ -87,11 +89,11 @@ const resizeImage = () => {
     canvas.height = heightInput;
 
     ctx.drawImage(selectedImage, 0, 0, widthInput, heightInput);
-    const url = canvas.toDataURL(IMAGE_FORMAT);
+    const url = canvas.toDataURL(image_format);
 
     canvas.toBlob((blob) => {
         newSizeImg.innerHTML = `Новый вес: ≈ ${blob.size / 1000} кб`;
-    }, IMAGE_FORMAT);
+    }, image_format);
 
     return url;
 };
@@ -118,6 +120,7 @@ closeButton.addEventListener('click', () => {
     resetFileInput();
     updateInitialSize(imageSizes[selectResized.value]);
     displayPicture(selectingPicture());
+    image_format = 'image/jpeg';
 });
 
 selectResized.addEventListener('change', handleSelectChange);
