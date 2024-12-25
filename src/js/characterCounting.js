@@ -9,8 +9,9 @@ const specialChars = document.getElementById('specialChars');
 const copyIcon = document.getElementById('copyIcon');
 
 function updateCharacterCount(text) {
-    totalChars.textContent = text.length;
-    noSpaces.textContent = text.replace(/\s/g, '').length;
+    const textWithoutLineBreaks = text.replace(/[\r\n]+/g, '');
+    totalChars.textContent = textWithoutLineBreaks.length;
+    noSpaces.textContent = textWithoutLineBreaks.replace(/\s/g, '').length;
 }
 
 function updateWordCount(text) {
