@@ -6,6 +6,7 @@ const config = {
 		dataAnalysis: './src//js/dataAnalysis.js',
 		photoResolution: './src/js/photoResolution.js',
 		statusCode: './src/js/statusCode.js',
+		characterCounting: './src/js/characterCounting.js',
 	},
 	output: {
 		filename: '[name].bundle.js',
