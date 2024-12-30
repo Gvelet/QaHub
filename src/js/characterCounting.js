@@ -15,7 +15,9 @@ function updateCharacterCount(text) {
 }
 
 function updateWordCount(text) {
-    const words = text.match(/[\wа-яё'-]+/gi);
+    const normalizedText = text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+    const words = normalizedText.match(/(?:[а-яёa-z]+(?:[-'][а-яёa-z]*)*)/gi);
     wordCount.textContent = words ? words.length : 0;
 }
 
