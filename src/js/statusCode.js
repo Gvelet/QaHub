@@ -7,6 +7,10 @@ const selectCodes = document.getElementById('statusesSelectCodes');
 
 let statusesData = [];
 
+// Ваш ключ и вектор инициализации для расшифровки
+const key = 'your-secret-key'; // Замените на ваш ключ
+const iv = 'your-initialization-vector'; // Замените на ваш вектор инициализации
+
 const getCodesSelect = (codes) => {
     selectCodes.innerHTML = `<option value="" disabled selected>Выберите статус код</option>`;
     
@@ -17,8 +21,17 @@ const getCodesSelect = (codes) => {
 
 const fetchStatuses = async () => {
     try {
-        const response = await fetch('./files/get_statuses.php');
-        statusesData = await response.json();
+        const response = await fetch('../files/get_statuses.php');
+        const result = await response.json();
+        
+        // Расшифровка данных
+        const decryptedData = CryptoJS.AES.decrypt(result.data, key, {
+            iv: CryptoJS.enc.Utf8.parse(iv),
+            mode: CryptoJS.mode.CBC,
+            padding: CryptoJS.pad.Pkcs7
+        }).toString(CryptoJS.enc.Utf8);
+        
+        statusesData = JSON.parse(decryptedData);
         initializeSelectGroups();
         addEventListeners();
     } catch (err) {
