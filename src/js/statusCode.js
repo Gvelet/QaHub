@@ -17,7 +17,7 @@ const getCodesSelect = (codes) => {
 
 const fetchStatuses = async () => {
     try {
-        const response = await fetch('./files/statuses.json');
+        const response = await fetch('./files/get_statuses.php');
         statusesData = await response.json();
         initializeSelectGroups();
         addEventListeners();
