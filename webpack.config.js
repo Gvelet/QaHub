@@ -7,6 +7,8 @@ const config = {
 		photoResolution: './src/js/photoResolution.js',
 		statusCode: './src/js/statusCode.js',
 		characterCounting: './src/js/characterCounting.js',
+		tests: './src/js/tests.js',
+		test: './src/js/test.js',
 	},
 	output: {
 		filename: '[name].bundle.js',

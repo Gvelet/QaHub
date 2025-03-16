@@ -668,3 +668,195 @@
         display: none;
     }
 }
+
+// Все тесты
+.tests{
+    padding-top: 70px;
+    &__inner{
+        margin-bottom: 40px;
+    }
+    &__content{
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+        margin-bottom: 70px;
+    }
+    &__title{
+        margin-bottom: 30px;
+    }
+    &__form{
+        display: flex;
+        justify-content: center;
+        gap: 80px;
+    }
+    &__form-category{
+        background-color: #ffffff;
+        border: 1px solid #3f3f3f;
+        border-radius: 8px;
+        font-size: 14px;
+        line-height: 16px;
+        font-weight: 400;
+        color: #000000;
+        width: 275px;
+        padding: 8px 5px;
+        cursor: pointer;
+    }
+    &__form-category option{
+        background-color: #fff;
+        color: #000000;
+    }
+    &__search{
+        background-color: #ffffff;
+        border: 1px solid #3f3f3f;
+        border-radius: 8px;
+        font-size: 14px;
+        line-height: 16px;
+        font-weight: 400;
+        color: #000000;
+        width: 275px;
+        padding: 10px 5px;
+        cursor: pointer;
+    }
+    &__wrapper-tests{
+        margin-top: 25px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+    &-item{
+        display: flex;
+        background-color: #fff;
+        padding: 12px 25px;
+    }
+    &__item-icon{
+        margin-right: 24px;
+    }
+    &__item-title{
+        color: #000;
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 3px;
+    }
+    &__item-description{
+        font-size: 18px;
+        color: #000;
+        max-width: 400px;
+    }
+}
+
+// Тест
+.test{
+    padding-top: 70px;
+    &__inner{
+        max-width: 1150px;
+        margin: 0 auto;
+    }
+    &__wrapper{
+        margin-top: 35px;
+    }
+    &__start-btn{
+        display: block;
+        background-color: #55B4D4;
+        color: #fff;
+        border-radius: 8px;
+        max-width: 300px;
+        text-align: center;
+        padding: 10px 80px;
+        margin: 0 auto;
+        margin-bottom: 35px;
+    }
+    &__text{
+        font-size: 22px;
+        text-align: center;
+    }
+    &__info{
+        margin-top: 25px;
+        display: flex;
+        justify-content: space-between;
+    }
+    &__counting-questions,
+    &__time{
+        font-size: 22px;
+        color: #fff;
+    }
+}
+
+.tests-start{
+    border-radius: 10px;
+    padding: 15px 20px;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 400;
+    &__top{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #222222;
+        margin-bottom: 10px;
+        padding: 15px 20px;
+    }
+    &__counter-questtion{
+        display: flex;
+        align-items: center;
+    }
+    &__counter-title{
+        margin-right: 15px;
+    }
+    &__progress-bar{
+        margin-right: 10px;
+        width: 200px;
+        height: 30px;
+        background-color: #333333;
+        border-radius: 2px;
+        overflow: hidden;
+    }
+    &__progress-bar-fill{
+        width: 0%;
+        height: 100%;
+        background-color: #5CB85C;
+        transition: width 1s ease-in-out;
+    }
+    &__time{
+        display: flex;
+    }
+    &__time-title{
+        margin-right: 5px;
+    }
+    &__test{
+        background-color: #211F1F;
+        padding: 20px 20px 40px;
+        display: flex;
+    }
+    &__questions{
+        max-width: 580px;
+        margin-right: 90px;
+    }
+    &__questions-content{
+        margin-bottom: 40px;
+    }
+    &__question-title{
+        margin-bottom: 20px;
+    }
+    &__questions-img{
+        max-width: 400px;
+        max-height: 240px;
+    }
+    &__answers-list{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    &__answers-item{
+        display: flex;
+        align-items: center;
+    }
+    &__answers-title{
+        margin-bottom: 20px;
+    }
+    &__answers-list input{
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+}
