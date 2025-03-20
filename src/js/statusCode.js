@@ -1,19 +1,15 @@
 const input = document.getElementById('statuses__wrapper-input');
 const statusInfo = document.getElementById('statuses__info');
 const submit = document.querySelector('.statuses__wrapper-submit');
-
 const selectGroups = document.getElementById('statusesSelectGroups');
 const selectCodes = document.getElementById('statusesSelectCodes');
-
 let statusesData = [];
+const secretKey = "My$ecretK3y!2023"; 
+import CryptoJS from 'crypto-js';
 
-// Ваш ключ и вектор инициализации для расшифровки
-const key = 'your-secret-key'; // Замените на ваш ключ
-const iv = 'your-initialization-vector'; // Замените на ваш вектор инициализации
 
 const getCodesSelect = (codes) => {
     selectCodes.innerHTML = `<option value="" disabled selected>Выберите статус код</option>`;
-    
     codes.forEach(code => {
         selectCodes.innerHTML += `<option value="${code.name}">${code.name}</option>`;
     });
@@ -21,17 +17,11 @@ const getCodesSelect = (codes) => {
 
 const fetchStatuses = async () => {
     try {
-        const response = await fetch('../files/get_statuses.php');
-        const result = await response.json();
-        
-        // Расшифровка данных
-        const decryptedData = CryptoJS.AES.decrypt(result.data, key, {
-            iv: CryptoJS.enc.Utf8.parse(iv),
-            mode: CryptoJS.mode.CBC,
-            padding: CryptoJS.pad.Pkcs7
-        }).toString(CryptoJS.enc.Utf8);
-        
-        statusesData = JSON.parse(decryptedData);
+        const response = await fetch('../files/encrypted/encrypted_statuses.json');
+        const encryptedData = await response.text(); // Получаем зашифрованные данные как текст
+        const decryptedData = decryptData(encryptedData); // Расшифровываем данные
+        statusesData = JSON.parse(decryptedData); // Парсим расшифрованные данные
+
         initializeSelectGroups();
         addEventListeners();
     } catch (err) {
@@ -50,7 +40,6 @@ const addEventListeners = () => {
         const status = statusesData.statuses.find(s => s.name === statusCode);
         OutputStatusCodes(status);
     });
-
     selectGroups.addEventListener('change', updateCodesSelect);
     selectCodes.addEventListener('change', updateStatusInfo);
 };
@@ -64,7 +53,6 @@ const updateCodesSelect = () => {
 
 const updateStatusInfo = () => {
     const selectedCode = selectCodes.value;
-    
     if (selectedCode) {
         const statusCode = parseInt(selectedCode);
         const status = statusesData.statuses.find(s => s.name === statusCode);
@@ -79,13 +67,18 @@ const StatusSearchResult = () => {
 
 const OutputStatusCodes = (status) => {
     if (status) {
-        statusInfo.innerHTML = 
-            `<p class='statuses__info-title'>Статус код ${status.name} - ${status.title}</p>
-             <p>${status.description}</p>`;
+        // Вывод информации о статусе
+        statusInfo.innerHTML = `<p class='statuses__info-title'>Статус код ${status.name} - ${status.title}</p> <p>${status.description}</p>`;
     } else {
         statusInfo.innerHTML = "<p>К сожалению ничего не найдено. Попробуйте ввести другой статус код</p>";
     }
     StatusSearchResult();
+};
+
+// Функция расшифровки
+const decryptData = (encryptedData) => {
+    const bytes = CryptoJS.AES.decrypt(encryptedData, secretKey);
+    return bytes.toString(CryptoJS.enc.Utf8);
 };
 
 fetchStatuses();

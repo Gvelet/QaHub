@@ -2,12 +2,16 @@ let tests = {};
 let currentQuestionIndex = 0;
 let userAnswers = [];
 const contentDiv = document.getElementById('testWrapper');
-let countdownInterval; // Переменная для хранения интервала таймера
-let remainingTime; // Переменная для хранения оставшегося времени
+let countdownInterval; 
+let remainingTime; 
+const secretKey = "My$ecretK3y!2023"; 
+import CryptoJS from 'crypto-js';
 
 async function loadTests() {
-    const response = await fetch('https://raw.githubusercontent.com/Gvelet/QaHub-api/refs/heads/main/db/combined.json');
-    const data = await response.json();
+    const response = await fetch('../files/encrypted/encrypted_tests.json');
+    const encryptedData = await response.text();
+    const decryptedData = decryptData(encryptedData); 
+    const data = JSON.parse(decryptedData);
     data.forEach(test => {
         const id = Object.keys(test)[0];
         tests[id] = test[id];
@@ -46,15 +50,16 @@ function createTestInfoHTML(testData) {
 }
 
 const updateCountdown = () => {
-    const wrapperTime = document.querySelector('.tests-start__time span');
+    const wrapperTime = document.getElementById('remainingTimeSpan'); // Используем id таймера
     const minutes = Math.floor(remainingTime / 60);
     const seconds = remainingTime % 60;
     const formattedTime = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-    wrapperTime.textContent = formattedTime;
+    wrapperTime.textContent = formattedTime; // Обновляем только текст таймера
 
     if (remainingTime <= 0) {
         clearInterval(countdownInterval);
-        wrapperTime.textContent = "Время вышло!"; // Здесь можно добавить логику для завершения теста
+        wrapperTime.textContent = "Время вышло!";
+        // Здесь можно добавить логику для завершения теста
     }
 };
 
@@ -83,7 +88,7 @@ function createTestHtml(testData) {
                 </div>
                 <div class="tests-start__time">
                     <h4 class="tests-start__time-title">Осталось времени:</h4>
-                    <span></span>
+                    <span id="remainingTimeSpan"></span> <!-- Добавлено id для таймера -->
                 </div>
             </div>
             <div class="tests-start__test">
@@ -137,14 +142,14 @@ function addAnswerListeners(testData) {
 function handleAnswerSelection(testData) {
     const selectedInput = document.querySelector('input[name="answer"]:checked');
     if (selectedInput) {
-        // Вместо data-correct, отправьте ответ на сервер для проверки
         const selectedAnswerIndex = Array.from(selectedInput.parentNode.parentNode.children).indexOf(selectedInput.parentNode);
         const correctAnswerIndex = testData.questions[currentQuestionIndex].answers.findIndex(answer => answer.isCorrect);
-
-        userAnswers[currentQuestionIndex] = (selectedAnswerIndex === correctAnswerIndex); // Сохраняем правильность ответа
+        userAnswers[currentQuestionIndex] = (selectedAnswerIndex === correctAnswerIndex);
         currentQuestionIndex++;
+
         if (currentQuestionIndex < testData.questions.length) {
             contentDiv.innerHTML = createTestHtml(testData);
+            updateCountdown(); // Обновляем таймер после смены вопроса
             addAnswerListeners(testData);
         } else {
             displayResults(testData);
@@ -164,6 +169,11 @@ function displayResults(testData) {
         </div>
     `;
 }
+
+const decryptData = (encryptedData) => {
+    const bytes = CryptoJS.AES.decrypt(encryptedData, secretKey);
+    return bytes.toString(CryptoJS.enc.Utf8);
+};
 
 // Запуск загрузки тестов
 loadTests();

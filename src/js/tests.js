@@ -1,14 +1,18 @@
-// -----------------------------------------ВЫВОД ВСЕХ ТЕСТОВ-------------------------------------------------
+const secretKey = "My$ecretK3y!2023"; 
+import CryptoJS from 'crypto-js';
+
 function loadJSON() {
-    fetch('https://raw.githubusercontent.com/Gvelet/QaHub-api/refs/heads/main/db/combined.json')
+    fetch('../files/encrypted/encrypted_tests.json')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Сеть ответила с ошибкой');
             }
-            return response.json();
+            return response.text(); 
         })
-        .then(data => {
-            displayData(data);
+        .then(encryptedData => {
+            const decryptedData = decryptData(encryptedData);
+            const jsonData = JSON.parse(decryptedData); 
+            displayData(jsonData);
         })
         .catch(error => {
             console.error('Ошибка при загрузке JSON:', error);
@@ -36,5 +40,11 @@ function displayData(data) {
         contentDiv.appendChild(itemDiv);
     });
 }
+
+// Функция расшифровки
+const decryptData = (encryptedData) => {
+    const bytes = CryptoJS.AES.decrypt(encryptedData, secretKey);
+    return bytes.toString(CryptoJS.enc.Utf8);
+};
 
 loadJSON();
