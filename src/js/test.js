@@ -1,3 +1,5 @@
+import CryptoJS from 'crypto-js';
+import userLevels from './modules/statusDataTests.js';
 let tests = {};
 let currentQuestionIndex = 0;
 let userAnswers = [];
@@ -5,7 +7,6 @@ const contentDiv = document.getElementById('testWrapper');
 let countdownInterval; 
 let remainingTime; 
 const secretKey = "My$ecretK3y!2023"; 
-import CryptoJS from 'crypto-js';
 
 async function loadTests() {
     const response = await fetch('../files/encrypted/encrypted_tests.json');
@@ -21,14 +22,20 @@ async function loadTests() {
 
 function displayInfoTest() {
     const quizId = new URLSearchParams(window.location.search).get('test');
-    if (tests[quizId]) {
-        const testData = tests[quizId];
-        contentDiv.innerHTML = createTestInfoHTML(testData);
-        testStart();
-    } else {
-        contentDiv.innerHTML = '<p>Тест не найден.</p>';
+    const testsArray = Object.values(tests);
+
+    if (tests) {
+        const testData = testsArray.find(test => test.key === quizId);
+
+        if (testData) {
+            contentDiv.innerHTML = createTestInfoHTML(testData);
+            testStart();
+        } else {
+            contentDiv.innerHTML = '<p>Тест не найден.</p>';
+        }
     }
 }
+
 
 function createTestInfoHTML(testData) {
     return `
@@ -58,8 +65,7 @@ const updateCountdown = () => {
 
     if (remainingTime <= 0) {
         clearInterval(countdownInterval);
-        wrapperTime.textContent = "Время вышло!";
-        // Здесь можно добавить логику для завершения теста
+        displayResults(testData)
     }
 };
 
@@ -88,7 +94,7 @@ function createTestHtml(testData) {
                 </div>
                 <div class="tests-start__time">
                     <h4 class="tests-start__time-title">Осталось времени:</h4>
-                    <span id="remainingTimeSpan"></span> <!-- Добавлено id для таймера -->
+                    <span id="remainingTimeSpan"></span>
                 </div>
             </div>
             <div class="tests-start__test">
@@ -123,15 +129,19 @@ function testStart() {
 // Функция для отображения теста
 function displayTest() {
     const quizId = new URLSearchParams(window.location.search).get('test');
-    const testData = tests[quizId];
+    const testsArray = Object.values(tests);
 
-    contentDiv.innerHTML = createTestHtml(testData);
-    startCountdown(testData)
-    addAnswerListeners(testData); // Добавляем обработчики для ответов
+    if (tests) {
+        const testData = testsArray.find(test => test.key === quizId);
+        contentDiv.innerHTML = createTestHtml(testData);
+        startCountdown(testData)
+        addAnswerListeners(testData);
+    }   
 }
 
 // Функция для добавления обработчиков нажатия на ответы
 function addAnswerListeners(testData) {
+    const checked = document.querySelector('.tests-start__answer-input')
     const answerElements = document.querySelectorAll('input[name="answer"]');
     answerElements.forEach(answerElement => {
         answerElement.addEventListener('change', () => handleAnswerSelection(testData));
@@ -159,14 +169,64 @@ function handleAnswerSelection(testData) {
     }
 }
 
+function userStatusTest(testData, userLevels){
+    const { newbie, average, experienced } = userLevels;
+    const totalQuestions = testData.questions.length;
+    const correctAnswers = userAnswers.filter(answer => answer).length;
+    const percentageCorrectAnswers = Math.floor(correctAnswers / totalQuestions * 100);
+
+    if(percentageCorrectAnswers <= 42){
+        return newbie
+    }else if(percentageCorrectAnswers <= 77 && percentageCorrectAnswers >= 43){
+        return average
+    }else{
+        return experienced 
+    }
+
+};
+
 // Функция для отображения результатов
 function displayResults(testData) {
+    const totalQuestions = testData.questions.length;
+    const userLevel = userStatusTest(testData, userLevels);
+    clearInterval(countdownInterval);
+
+    const startTime = testData.time * 60;
+    const endTtimeSeconds = startTime - remainingTime
+    const minutes = Math.floor(endTtimeSeconds / 60);
+    const seconds = endTtimeSeconds % 60;
+
     const correctAnswers = userAnswers.filter(answer => answer).length;
+    const percentageCorrectAnswers = Math.floor(correctAnswers / totalQuestions * 100);
+
     contentDiv.innerHTML = `
-        <div class="results">
-            <h2>Тест завершен!</h2>
-            <p>Вы ответили правильно на ${correctAnswers} из ${testData.questions.length} вопросов.</p>
-        </div>
+            <section class="test-results">
+                <div class="container">
+                    <div class="test-results__inner">
+                        <div class="test-results__top">
+                            <h3 class="test-results__title">Тест: "${testData.title}"</h3>
+                            <div class="test-results__time">Потраченное время: 00:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}</div>
+                        </div>
+                        <div class="test-results__bottom">
+                            <div class="test-results__status">Статус “${userLevel.title}”</div>
+                            <div class="test-results__count-answers">
+                                <div class="test-results__count-progress">
+                                    <div class="test-results__progress-bar" id="test-results__progress" style="width: ${percentageCorrectAnswers}%;"></div>
+                                    <div class="test-results__progress-text" id="test-results__progress-text">${percentageCorrectAnswers}% правильных ответов</div>
+                                </div>
+                                <div class="test-results__score">${correctAnswers}/${testData.questions.length}</div>
+                            </div>
+                            <p class="test-results__text">
+                                ${userLevel.text}
+                            </p>
+                            <div class="test-results__btns">
+                                <a class="test-results__btns-again" href="${window.location.origin}/test.html?test=${testData.key}">Пройти еще раз</a>
+                                <button disabled class="test-results__show-answer" title="Кнопка в разработке">Показать ответы</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
     `;
 }
 

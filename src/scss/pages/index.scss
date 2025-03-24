@@ -726,10 +726,12 @@
     &-item{
         display: flex;
         background-color: #fff;
-        padding: 12px 25px;
+        padding: 12px 15px;
+        height: 100px;
     }
     &__item-icon{
         margin-right: 24px;
+        height: 70px;
     }
     &__item-title{
         color: #000;
@@ -740,7 +742,7 @@
     &__item-description{
         font-size: 18px;
         color: #000;
-        max-width: 400px;
+        max-width: 420px;
     }
 }
 
@@ -859,4 +861,115 @@
         cursor: pointer;
         margin-right: 10px;
     }
+    &__answers-list input:checked{
+        background-color: red;
+        color: red;
+    }
+}
+
+.test-results{
+    margin-top: 70px;
+    margin-bottom: 100px;
+    &__inner{
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+        background-color: #222222;
+        color: #fff;
+    }
+    &__top{
+        position: relative;
+        padding: 15px 15px;
+        text-align: start;
+    }
+    &__top::after{
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 1px;
+        width: 100%;
+        background-color: #fff;
+    }
+    &__title{
+        font-size: 32px;
+        font-weight: 500;
+        margin-bottom: 11px;
+    }
+    &__time{
+        font-size: 24px;
+    }
+    &__bottom{
+        background-color: #211F1F;
+        padding: 10px 15px 30px;
+    }
+    &__status{
+        font-size: 32px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+    &__count-answers{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    &__count-progress{
+        position: relative;
+        margin-right: 10px;
+        width: 300px;
+        height: 50px;
+        background-color: #333333;
+        border-radius: 2px;
+        overflow: hidden;
+    }
+    &__progress-bar{
+        width: 0%;
+        height: 100%;
+        background-color: #5CB85C;
+        transition: width 1s ease-in-out;
+    }
+    &__progress-text{
+        font-size: 20px;
+        opacity: 0.5;
+        position: absolute;
+        z-index: 2;
+        top: 25%;
+        left: 0;
+        right: 0;
+    }
+    &__score{
+        font-size: 24px;
+    }
+    &__text{
+        font-size: 16px;
+        padding: 5px 30px;
+        margin-bottom: 25px;
+    }
+    &__btns{
+        display: flex;
+        justify-content: center;
+        gap: 55px;
+    }
+    &__btns-again,
+    &__show-answer{
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: block;
+        background-color: #999999;
+        color: #fff;
+        border-radius: 8px;
+        max-width: 195px;
+        text-align: center;
+        padding: 13px 30px;
+    }
+    &__btns-again:hover{
+        background-color: #655F5F;
+    }
+    &__show-answer{
+        background-color: #ccc;
+        color: #666; 
+        cursor: not-allowed; 
+    }
+        
 }

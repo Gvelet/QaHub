@@ -27,9 +27,9 @@ function displayData(data) {
         const itemDiv = document.createElement('div');
         itemDiv.classList.add('tests__column');
         itemDiv.innerHTML = `
-            <a class="tests-item" href="test.html?test=${key}">
+            <a class="tests-item" href="test.html?test=${testData.key}">
                 <div class="tests__item-icon">
-                    <img src="./img/test-icon.png" alt="icon">
+                    <img src="./img/${testData.icon}" alt="${testData.icon}">
                 </div>
                 <div class="tests__item-content">
                     <h3 class="tests__item-title">${testData.title}</h3>
@@ -45,6 +45,8 @@ function displayData(data) {
 const decryptData = (encryptedData) => {
     const bytes = CryptoJS.AES.decrypt(encryptedData, secretKey);
     return bytes.toString(CryptoJS.enc.Utf8);
+
+    
 };
 
 loadJSON();
