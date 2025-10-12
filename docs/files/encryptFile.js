@@ -6,7 +6,8 @@ const axios = require('axios');
 
 const secretKey = "My$ecretK3y!2023";
 const url = 'https://raw.githubusercontent.com/Gvelet/QaHub-api/refs/heads/main/db/statuses.json';
-const urlTests = 'https://raw.githubusercontent.com/Gvelet/QaHub-api/refs/heads/main/db/combined.json'
+const urlTests = 'https://raw.githubusercontent.com/Gvelet/QaHub-api/refs/heads/main/db/combinedFiles/allTests.json';
+const urlPractices = 'https://raw.githubusercontent.com/Gvelet/QaHub-api/refs/heads/main/db/combinedFiles/allPractices.json';
 
 // Функция для загрузки и шифрования данных
 const encryptDataFromUrl = async (url, filename) => {
@@ -31,3 +32,4 @@ const encryptDataFromUrl = async (url, filename) => {
 // Вызов функции
 encryptDataFromUrl(url, 'encrypted/encrypted_statuses.json');
 encryptDataFromUrl(urlTests, 'encrypted/encrypted_tests.json');
+encryptDataFromUrl(urlPractices, 'encrypted/encrypted_practices.json');
