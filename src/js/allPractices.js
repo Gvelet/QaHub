@@ -2,7 +2,7 @@ const secretKey = "My$ecretK3y!2023";
 import CryptoJS from 'crypto-js';
 
 function loadJSON() {
-    fetch('../files/encrypted/encrypted_tests.json')
+    fetch('../files/encrypted/encrypted_practices.json')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Сеть ответила с ошибкой');
@@ -20,12 +20,12 @@ function loadJSON() {
 }
 
 function displayData(data) {
-    const contentDiv = document.getElementById('testsWrapper');
+    const contentDiv = document.getElementById('practicesWrapper');
     data.forEach(item => {
         const itemDiv = document.createElement('div');
-        itemDiv.classList.add('tests__column');
+        itemDiv.classList.add('practices__column');
         itemDiv.innerHTML = `
-            <a class="tests-item" href="test.html?test=${item.key}">
+            <a class="practices-item" href="allPractices/${item.url}.html">
                 <div class="tests__item-icon">
                     <img src="./img/${item.icon}" alt="${item.icon}">
                 </div>

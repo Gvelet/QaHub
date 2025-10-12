@@ -13,20 +13,16 @@ async function loadTests() {
     const encryptedData = await response.text();
     const decryptedData = decryptData(encryptedData); 
     const data = JSON.parse(decryptedData);
-    data.forEach(test => {
-        const id = Object.keys(test)[0];
-        tests[id] = test[id];
-    });
-    displayInfoTest();
+
+    displayInfoTest(data);
 }
 
-function displayInfoTest() {
+function displayInfoTest(test) {
     const quizId = new URLSearchParams(window.location.search).get('test');
-    const testsArray = Object.values(tests);
 
-    if (tests) {
-        const testData = testsArray.find(test => test.key === quizId);
-
+    if (test) {
+        const testData = test.find(test => test.key === quizId);
+        tests = testData
         if (testData) {
             contentDiv.innerHTML = createTestInfoHTML(testData);
             testStart();
@@ -129,13 +125,11 @@ function testStart() {
 // Функция для отображения теста
 function displayTest() {
     const quizId = new URLSearchParams(window.location.search).get('test');
-    const testsArray = Object.values(tests);
 
     if (tests) {
-        const testData = testsArray.find(test => test.key === quizId);
-        contentDiv.innerHTML = createTestHtml(testData);
-        startCountdown(testData)
-        addAnswerListeners(testData);
+        contentDiv.innerHTML = createTestHtml(tests);
+        startCountdown(tests)
+        addAnswerListeners(tests);
     }   
 }
 

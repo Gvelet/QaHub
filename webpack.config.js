@@ -9,6 +9,8 @@ const config = {
 		characterCounting: './src/js/characterCounting.js',
 		tests: './src/js/tests.js',
 		test: './src/js/test.js',
+		allPractices: './src/js/allPractices.js',
+		practic: './src/js/practic.js'
 	},
 	output: {
 		filename: '[name].bundle.js',
