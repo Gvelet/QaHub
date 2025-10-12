@@ -21,22 +21,37 @@ function loadJSON() {
 
 function displayData(data) {
     const contentDiv = document.getElementById('practicesWrapper');
-    data.forEach(item => {
-        const itemDiv = document.createElement('div');
-        itemDiv.classList.add('practices__column');
-        itemDiv.innerHTML = `
-            <a class="practices-item" href="allPractices/${item.url}.html">
-                <div class="tests__item-icon">
-                    <img src="./img/${item.icon}" alt="${item.icon}">
-                </div>
-                <div class="tests__item-content">
-                    <h3 class="tests__item-title">${item.title}</h3>
-                    <div class="tests__item-description">${item.briefDescription}</div>
-                </div>
-            </a>
-        `;
-        contentDiv.appendChild(itemDiv);
-    });
+    // data.forEach(item => {
+    //     const itemDiv = document.createElement('div');
+    //     itemDiv.classList.add('practices__column');
+    //     itemDiv.innerHTML = `
+    //         <a class="practices-item" href="allPractices/${item.url}.html">
+    //             <div class="tests__item-icon">
+    //                 <img src="./img/${item.icon}" alt="${item.icon}">
+    //             </div>
+    //             <div class="tests__item-content">
+    //                 <h3 class="tests__item-title">${item.title}</h3>
+    //                 <div class="tests__item-description">${item.briefDescription}</div>
+    //             </div>
+    //         </a>
+    //     `;
+    //     contentDiv.appendChild(itemDiv);
+    // });
+    const itemDiv = document.createElement('div');
+    itemDiv.classList.add('practices__column');
+    itemDiv.innerHTML = `
+        <a class="practices-item" href="allPractices/${data[0].url}.html">
+            <div class="tests__item-icon">
+                <img src="./img/${data[0].icon}" alt="${data[0].icon}">
+            </div>
+            <div class="tests__item-content">
+                <h3 class="tests__item-title">${data[0].title}</h3>
+                <div class="tests__item-description">${data[0].briefDescription}</div>
+            </div>
+        </a>
+    `;
+    contentDiv.appendChild(itemDiv);
+
 }
 
 // Функция расшифровки
