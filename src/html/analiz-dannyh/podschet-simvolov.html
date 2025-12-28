@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Подсчет символов в тексте | Quality Space</title>
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://qaspace.ru/characterCounting.html">
+        <meta name="description" content="Используйте наш инструмент для подсчета символов, слов и специальных символов. Получите детальную информацию о тексте для повышения точности тестирования.">
+		<meta name="keywords" content="подсчет символов, анализ текста, инструменты для анализа текста, проверка длины текста, оптимизация контента, подсчет слов, статистика текста" />
+        <link rel="canonical" href="https://qaspace.ru/characterCounting.html"/>
+        <link rel="icon" href="../../img/bugFavicon.ico" type="image/x-icon">
+        <link type="image/x-icon" href="../../img/bugFavicon.ico" rel="shortcut icon">
+		<link type="Image/x-icon" href="../../img/bugFavicon.ico" rel="icon">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="../../css/main.css" />
+	</head>
+    <body>
+        @@include('../blocks/header.html')
+
+        <main class="main">
+            <section class="counting">
+                <div class="container">
+                    <div class="counting__inner">
+                        <div class="counting__content">
+                            <h2 class="counting__title title">Подсчет символов</h2>
+                            <p class="counting__text">Наш инструмент предоставляет детальный анализ текста, включая подсчет символов, слов и различных категорий знаков, таких как кириллические и латинские символы, цифры и спецсимволы.</p>
+                        </div>
+
+                        <div class="counting__wrapper">
+                            <div class="counting__textarea-wrapper">
+                                <textarea class="counting__wrapper-textarea" id="input-counting" placeholder="Введите текст..."></textarea>
+                                <img class="counting__wrapper-copy" src="../../img/copy-icon.png" alt="Copy Icon" id="copyIcon">
+                            </div>
+                            <div class="counting__wrapper-info" id="counting-info">
+                                <div class="counting__wrapper-column">
+                                    <div class="counting__counter-title">Всего символов</div>
+                                    <div class="counting__counter-num" id="totalChars">0</div>
+                                </div>
+                                <div class="counting__wrapper-column">
+                                    <div class="counting__counter-title">Без пробелов</div>
+                                    <div class="counting__counter-num" id="noSpaces">0</div>
+                                </div>
+                                <div class="counting__wrapper-column">
+                                    <div class="counting__counter-title">Кол-во слов</div>
+                                    <div class="counting__counter-num" id="wordCount">0</div>
+                                </div>
+                                <div class="counting__wrapper-column">
+                                    <div class="counting__counter-title">Всего кириллических символов</div>
+                                    <div class="counting__counter-num" id="cyrillicChars">0</div>
+                                </div>
+                                <div class="counting__wrapper-column">
+                                    <div class="counting__counter-title">Всего латинских символов</div>
+                                    <div class="counting__counter-num" id="latinChars">0</div>
+                                </div>
+                                <div class="counting__wrapper-column">
+                                    <div class="counting__counter-title">Всего цифр</div>
+                                    <div class="counting__counter-num" id="digitCount">0</div>
+                                </div>
+                                <div class="counting__wrapper-column">
+                                    <div class="counting__counter-title">Спец. символы</div>
+                                    <div class="counting__counter-num" id="specialChars">0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        @@include('../blocks/footer.html')
+
+        <script src="../../js/characterCounting.bundle.js"></script>
+    </body>
+</html>

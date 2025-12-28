@@ -45,7 +45,7 @@ const displayPicture = (src) => {
 
 
 
-displayPicture(`./img/${selectResized.value}.jpg`)
+displayPicture(`../../img/${selectResized.value}.jpg`)
 
 const loadFile = (file) => {
     const reader = new FileReader();
@@ -75,7 +75,7 @@ const handleSelectChange = () => {
 
 const selectingPicture = () => {
     const selectedValue = selectResized.value;
-    return `./img/${selectedValue}.jpg`;
+    return `../../img/${selectedValue}.jpg`;
 };
 
 const resizeImage = () => {

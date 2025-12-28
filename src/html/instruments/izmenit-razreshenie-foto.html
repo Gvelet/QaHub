@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Изменение разрешения фото | Quality Space</title>
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://qaspace.ru/resizePhoto.html">
+        <meta name="description" content="Поменяйте размер фотографий на любой, просмотрите примерный вес фото. Загружайте свои изображения или воспользуйтесь предложенными примерами.">
+		<meta name="keywords" content="изменение разрешения фото, инструменты для редактирования изображений, изменить ширину картинки, изменить высоту картинки, узнать размер фото, установить ширину и высоту" />
+        <link rel="canonical" href="https://qaspace.ru/resizePhoto.html"/>
+        <link rel="icon" href="../../img/bugFavicon.ico" type="image/x-icon">
+        <link type="image/x-icon" href="../../img/bugFavicon.ico" rel="shortcut icon">
+		<link type="Image/x-icon" href="../../img/bugFavicon.ico" rel="icon">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="../../css/main.css" />
+	</head>
+    <body>
+        @@include('../blocks/header.html')
+        <main class="main">
+            <section class="resized">
+                <div class="container">
+                    <div class="resized__inner">
+                        <div class="resized__content">
+                            <h2 class="resized__title title">Поменять разрешение фото</h2>
+                            <p class="resized__text">С помощью этого инструмента, вы можете поменять размер своей фотографии на любой желающий. Поддерживаемый формат изображений: PNG, Jpeg, WEbP, GIF</p>
+                        </div>
+
+                        <div class="resized__wpapper">
+                            <div class="resized__functional">
+                                <h4 class="resized__functional-title">Выбрать фото</h4>
+                                <div class="resized__select-upload">
+                                    <label class="resized__upload-label" for="resizedSelectUpload">Выбрать фотографию из списка</label>
+                                    <select class="resized__select" id="resizedSelectUpload">
+                                        <option value="black">Черный экран</option>
+                                        <option value="dog">Собака</option>
+                                        <option value="forest">Природа</option>
+                                    </select>
+                                </div>
+
+                                <div class="resized__file-upload">
+                                    <label class="resized__upload-label" for="resizedFileLabel">Загрузите свою фотографию</label>
+
+                                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                                    <button class="resized__file-choose" id="fileButton">Выберите файл...</button>
+                                    <input type="text" class="resized__file-input" id="fileName" value="Файл не выбран" readonly>
+                                    <button class="resized__file-btn resized__file-close" id="closeButton">X</button>
+                                </div>
+
+                                <div class="resized__upload-dimensions">
+                                    <h4 class="resized__dimensions-title">Установить ширину и высоту</h4>
+                                    <div class="resized__dimensions-inner">
+                                        <div class="resized__upload-item">
+                                            <label class="resized__upload-label" for="resizedWidth">Ширина</label>
+                                            <input class="resized__dimensions-input" type="number" id="resizedWidth" value="350">
+                                        </div>
+                                        <div class="resized__upload-item">
+                                            <label class="resized__upload-label" for="resizedHeight">Высота</label>
+                                            <input class="resized__dimensions-input" type="number" id="resizedHeight" value="350">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="resized__upload-download">
+                                    <button id="downloadButton" class="resized__upload-button">Скачать с новым разрешением</button>
+                                    <div class="resized__new-size">Новый вес: -</div>
+                                </div>
+
+
+                            </div>
+                            <div class="resized__wrapper-images" id="resized-image">
+                                <div class="resized__image-text">Выбранная фотография</div>
+                                <div class="resized-wrapper-img">
+                                </div>
+                                <div class="resized__initial-size">Изначальный вес: </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        @@include('../blocks/footer.html')
+
+        <script src="../../js/photoResolution.bundle.js"></script>
+    </body>
+</html>

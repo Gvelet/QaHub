@@ -35,7 +35,7 @@ async function loadTests() {
     const decryptedData = decryptData(encryptedData); 
     const data = JSON.parse(decryptedData);
 
-    const page = window.location.pathname.match(/\/allPractices\/([^\.]+)\.html$/)?.[1];
+    const page = window.location.pathname.match(/\/practices\/([^\\/]+)\/?$/)?.[1];
     const findCurrentPractic = data.find(practic => practic.url === page);
     if (!findCurrentPractic) {
         console.error('Не найден текущий практик по адресу');

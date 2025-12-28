@@ -1,4 +1,5 @@
 const gulp = require('gulp');
+const browserSync = require('browser-sync').create();
 
 // HTML
 const fileInclude = require('gulp-file-include');
@@ -12,7 +13,6 @@ const autoprefixer = require('gulp-autoprefixer');
 const csso = require('gulp-csso');
 const webpCss = require('gulp-webp-css');
 
-const server = require('gulp-server-livereload');
 const clean = require('gulp-clean');
 const fs = require('fs');
 const sourceMaps = require('gulp-sourcemaps');
@@ -115,11 +115,23 @@ gulp.task('js:docs', function () {
 		.pipe(gulp.dest('./docs/js/'));
 });
 
-const serverOptions = {
-	livereload: true,
-	open: true,
-};
 
-gulp.task('server:docs', function () {
-	return gulp.src('./docs/').pipe(server(serverOptions));
+
+gulp.task('server:docs', function (done) {
+    browserSync.init({
+        server: {
+            baseDir: './docs/',
+            index: 'index.html',
+            middleware: function (req, res, next) {
+                if (req.url.endsWith('/')) {
+                    req.url += 'index.html';
+                } else if (!req.url.includes('.')) {
+                    req.url += '.html';
+                }
+                next();
+            }
+        },
+        open: true,
+        ghostMode: false
+    }, done);
 });

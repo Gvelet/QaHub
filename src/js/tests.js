@@ -27,7 +27,7 @@ function displayData(data) {
         itemDiv.innerHTML = `
             <a class="tests-item" href="test.html?test=${item.key}">
                 <div class="tests__item-icon">
-                    <img src="./img/${item.icon}" alt="${item.icon}">
+                    <img src="../../img/${item.icon}" alt="${item.icon}">
                 </div>
                 <div class="tests__item-content">
                     <h3 class="tests__item-title">${item.title}</h3>

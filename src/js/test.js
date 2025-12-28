@@ -99,7 +99,7 @@ function createTestHtml(testData) {
                         <div class="tests-start__question-title">Вопрос ${currentQuestionIndex + 1}:</div>
                         <div class="tests-start__question">${question.question}</div>
                     </div>
-                    ${question.image ? `<img class="tests-start__questions-img" src="./img/${question.image}" alt="Картинка для вопроса">` : ''}
+                    ${question.image ? `<img class="tests-start__questions-img" src="../../img/${question.image}" alt="Картинка для вопроса">` : ''}
                 </div>
                 <div class="tests-start__answers">
                     <h4 class="tests-start__answers-title">Варианты ответа:</h4>
@@ -214,7 +214,7 @@ function displayResults(testData) {
                                 ${userLevel.text}
                             </p>
                             <div class="test-results__btns">
-                                <a class="test-results__btns-again" href="${window.location.origin}/test.html?test=${testData.key}">Пройти еще раз</a>
+                                <a class="test-results__btns-again" href="${window.location.origin}/tests/test.html?test=${testData.key}">Пройти еще раз</a>
                                 <button disabled class="test-results__show-answer" title="Кнопка в разработке">Показать ответы</button>
                             </div>
                         </div>

@@ -2,7 +2,6 @@ const gulp = require('gulp');
 const fileInclude = require('gulp-file-include');
 const sass = require('gulp-sass')(require('sass'));
 const sassGlob = require('gulp-sass-glob');
-const server = require('gulp-server-livereload');
 const clean = require('gulp-clean');
 const fs = require('fs');
 const sourceMaps = require('gulp-sourcemaps');
@@ -12,6 +11,7 @@ const webpack = require('webpack-stream');
 const babel = require('gulp-babel');
 const imagemin = require('gulp-imagemin');
 const changed = require('gulp-changed');
+const browserSync = require('browser-sync').create();
 
 gulp.task('clean:dev', function (done) {
 	if (fs.existsSync('./build/')) {
@@ -94,13 +94,25 @@ gulp.task('js:dev', function () {
 		.pipe(gulp.dest('./build/js/'));
 });
 
-const serverOptions = {
-	livereload: true,
-	open: true,
-};
 
-gulp.task('server:dev', function () {
-	return gulp.src('./build/').pipe(server(serverOptions));
+gulp.task('server:dev', function (done) {
+    browserSync.init({
+        server: {
+            baseDir: './build/',
+            index: 'index.html',
+            middleware: function (req, res, next) {
+                // Добавляет .html к запросам без расширения
+                if (req.url.endsWith('/')) {
+                    req.url += 'index.html';
+                } else if (!req.url.includes('.')) {
+                    req.url += '.html';
+                }
+                next();
+            }
+        },
+        open: true,
+        ghostMode: false
+    }, done);
 });
 
 gulp.task('watch:dev', function () {
