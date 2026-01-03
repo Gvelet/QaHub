@@ -10,7 +10,9 @@ const config = {
 		tests: './src/js/tests.js',
 		test: './src/js/test.js',
 		allPractices: './src/js/allPractices.js',
-		practic: './src//js//practic.js'
+		practic: './src/js//practic.js',
+		blog: './src/js/blog.js',
+		article: './src/js/article.js'
 
 	},
 	output: {

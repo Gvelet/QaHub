@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Блог для тестировщиков | Quality Space</title>
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://qaspace.ru/allInstruments.html">
+    <meta name="description" content="Блог для тестировщиков Quality Space: статьи о QA, обзоры инструментов тестирования, советы по автоматизации, карьере и лучшим практикам контроля качества программного обеспечения.">
+    <meta name="keywords" content="тестирование, QA, автоматизация тестирования, инструменты QA, блог для тестировщиков, тестировщик, контроль качества, software testing, quality assurance, autotests, тесты" />
+    <link rel="canonical" href="https://qaspace.ru/allInstruments.html"/>
+    <link rel="icon" href="../../img/bugFavicon.ico" type="image/x-icon">
+    <link type="image/x-icon" href="../../img/bugFavicon.ico" rel="shortcut icon">
+    <link type="Image/x-icon" href="../../img/bugFavicon.ico" rel="icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css" />
+</head>
+<body>
+    @@include('../blocks/header.html')
+    <main class="main">
+      <section class="blog-header">
+        <div class="container">
+          <div class="breadcrumbs" id="breadcrumbs">
+            <a href="/">Главная</a> → <span>Блог</span>
+          </div>
+
+          <div class="blog__content">
+            <div class="blog__content-top">
+                 <h1 class="blog__title">Все статьи</h1>
+                 <p class="blog__subtitle">Полезные материалы по психологии простыми словами</p>
+            </div>
+
+            <div class="blog-filter" id="blogFilter">
+                <button class="blog-filter-btn active" data-category="all">Все</button>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section class="blog">
+        <div class="container">
+          <div class="blog__cards" id="blogCards"></div>
+          
+          <div class="blog-pagination" id="blogPagination"></div>
+          <div class="blog-empty" id="blogEmpty" style="display: none;">
+            Статьи не найдены. <a href="/">Вернуться на главную</a>
+          </div>
+        </div>
+      </section>
+    </main>
+    @@include('../blocks/footer.html')
+
+    <script src="../../js/blog.bundle.js"></script>
+</body>

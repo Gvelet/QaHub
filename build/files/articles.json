@@ -1,0 +1,11 @@
+[
+    {
+        "slug": "status-kod",
+        "title": "HTTP Статус-коды для QA",
+        "showOnHome": true,
+        "description": "5 групп, которые должен знать каждый тестировщик",
+        "image": "../img/blog-status-kod.png",
+        "category": "Теория",
+        "date": "2026-01-03"
+    }
+]

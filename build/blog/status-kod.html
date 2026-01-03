@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Анализ данных для тестировщиков | Quality Space</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>HTTP статус-коды для QA: 1xx-5xx с примерами</title>
+    <meta name="description" content="Разбираем HTTP статус-коды для QA: 1xx (инфо), 2xx (успех), 3xx (редиректы), 4xx (ошибки клиента), 5xx (сервер). 200 OK, 404 Not Found, 500 ISE и другие с примерами для тестировщиков API.">
+    <meta name="keywords" content="HTTP статус-коды, QA тестирование, API тестирование, статус коды 1xx 2xx 3xx 4xx 5xx, 200 OK, 404 Not Found, 500 Internal Server Error, редиректы, клиентские ошибки, серверные ошибки, веб тестирование">
+    <meta property="og:title" content="HTTP статус-коды для QA: 1xx-5xx с примерами">
+    <meta property="og:description" content="Разбираем HTTP статус-коды для QA: 1xx (инфо), 2xx (успех), 3xx (редиректы), 4xx (ошибки клиента), 5xx (сервер). 200 OK, 404 Not Found, 500 ISE и другие с примерами для тестировщиков API.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://qaspace.ru/dataAnalysis.html">
-    <meta name="description" content="Используйте наш функционал для анализа данных: подсчет символов, слов и специальных символов для повышения точности тестирования.">
-    <meta name="keywords" content="анализ данных, тестирование данных, инструменты для анализа, визуализация данных, статистика тестирования, обработка данных, анализ производительности" />
-    <link rel="canonical" href="https://qaspace.ru/dataAnalysis.html"/>
+    <meta property="og:url" content="https://qaspace.ru/blog/status-kod">
+    <meta property="og:site_name" content="Quality Space">
+    <meta name="twitter:title" content="HTTP статус-коды для QA: 1xx-5xx с примерами">
+    <meta name="twitter:description" content="Разбираем HTTP статус-коды для QA: 1xx (инфо), 2xx (успех), 3xx (редиректы), 4xx (ошибки клиента), 5xx (сервер). 200 OK, 404 Not Found, 500 ISE и другие с примерами для тестировщиков API.">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://qaspace.ru/blog/status-kod"/>
     <link rel="icon" href="../../img/bugFavicon.ico" type="image/x-icon">
     <link type="image/x-icon" href="../../img/bugFavicon.ico" rel="shortcut icon">
     <link type="Image/x-icon" href="../../img/bugFavicon.ico" rel="icon">
@@ -75,99 +81,79 @@
     </div>
 </header>
 
-    <main class="main">
-        <section class="instruments">
-            <div class="container">
-                <div class="instruments__inner">
-                    <div class="instruments__content">
-                        <h2 class="instruments__title title">Анализ данных</h2>
-                        <p class="instruments__text">
-                            Используйте инструменты для повышения эффективности работы. Стандартный подсчет символов, JSON парсер, генерация различных данных
-                        </p>
-                    </div>
-                    <div class="instruments__colums">
-                        <a href="podschet-simvolov" class="instruments__item instruments__item--unblocked">
-                            <div class="instruments__item-content">
-                                <h4 class="instruments__item-title">Подсчет символов</h4>
-                            </div>
-                            <img class="instruments__img--active" src="../../img/instruments-podschet.png" alt="slide-img">
-                        </a>
-                        <a href="" class="instruments__item instruments__item--blocked">
-                            <img class="instruments__img" src="../../img/in-development.png" alt="slide-img">
-                        </a>
-                        <a href="" class="instruments__item instruments__item--blocked">
-                            <img class="instruments__img" src="../../img/in-development.png" alt="slide-img">
-                        </a>
-                        <a href="" class="instruments__item instruments__item--blocked">
-                            <img class="instruments__img" src="../../img/in-development.png" alt="slide-img">
-                        </a>
-                        <a href="" class="instruments__item instruments__item--blocked">
-                            <img class="instruments__img" src="../../img/in-development.png" alt="slide-img">
-                        </a>
-                        <a href="" class="instruments__item instruments__item--blocked">
-                            <img class="instruments__img" src="../../img/in-development.png" alt="slide-img">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="feedback">
-            <div class="container">
-                <div class="feedback__inner">
-                    <h3 class="feedback__title">Есть идеи как улучшить сайт. Нашли баг? Хотите добавить новый функционал? Пишите</h3>
-                    <div class="feedback__social">
-                        <a class="feedback__social-link" href="https://t.me/Milem_gv">Телеграм @MilemGV</a>
-                        <a class="feedback__social-link" href="mailto:milemx1106@gmail.com">milemx1106@gmail.com</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="materials">
-            <div class="container">
-                <div class="materials__inner">
-                    <div class="materials__content">
-                        <h2 class="materials__content-title title">Похожие материалы</h2>
-                        <p class="materials__content-text">Тут собраны статьи/тесты которые помогут вам в работе с предоставленными выше инструментами</p>
-                    </div>
+    <article class="post-content">
+        <div class="container">
+            <nav class="breadcrumbs">
+                <a href="/">Главная</a> →
+                <a href="/blog/">Блог</a> →
+                <span></span>
+            </nav>
 
-                    <div class="materials__slider slider__content swiper">
-						<div class="swiper-wrapper">
-							<div class="swiper-slide">
-								<a href="" class="slider__content-item slider__content--blocked">
-									<img class="slider__content-img" src="../../img/in-development.png" alt="slide-img">
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a href="" class="slider__content-item slider__content--blocked">
-									<img class="slider__content-img" src="../../img/in-development.png" alt="slide-img">
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a href="" class="slider__content-item slider__content--blocked">
-									<img class="slider__content-img" src="../../img/in-development.png" alt="slide-img">
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a href="" class="slider__content-item slider__content--blocked">
-									<img class="slider__content-img" src="../../img/in-development.png" alt="slide-img">
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a href="" class="slider__content-item slider__content--blocked">
-									<img class="slider__content-img" src="../../img/in-development.png" alt="slide-img">
-								</a>
-							</div>
-						</div>
-						
-						<div class="swiper-button-prev"></div>
-						<div class="swiper-button-next"></div>
+            <div class="post-content-post">
+                <h1>HTTP Статус-коды для QA</h1>
+                <p>HTTP статус-коды – это трехзначные числа в ответах сервера, которые показывают результат запроса. Они делятся на 5 групп по первой цифре от 1 до 5:</p>
 
-						<div class="swiper-pagination"></div>
-					</div>
-                </div>
+                <h2>📋 Группы статус-кодов</h2>
+                <ul>
+                    <li>1xx ℹ️ Информационные</li>
+                    <li>2xx ✅ Успех</li>
+                    <li>3xx ➡️ Перенаправления(Редиректы)</li>
+                    <li>4xx ❌ Ошибки клиента</li>
+                    <li>5xx 🔥 Ошибки сервера</li>
+                </ul>
+
+                <h2>Рассмотрим каждую группу с примерами самых популярных статус кодов:</h2>
+                <h3>ℹ️ 1xx: Информационные(редко используется)</h3>
+                <ol>
+                    <li><strong>100 Continue</strong> ⏳ Код 100 Continue обозначает «нормальную работу». Он указывает, что пользователь сделал качественный запрос, и сервер начал его обрабатывать.
+                    </li>
+                    <li><strong>101 Switching Protocols</strong> 🔄 Он означает, что пользователь попросил переключить используемый тип протокола, и веб-сервер согласился на такой шаг.</li>
+                    <li><strong>102 Processing</strong> ⚙️ Запрос в обработке (долгие задачи).</li>
+                </ol>
+
+                <h3>🌟 2xx: Успешные</h3>
+                <ol>
+                    <li><strong>200 OK ✅</strong>  Код состояния 200, наверное, является наиболее популярным, но в то же время очень неприметным в плане использования. Он указывает, что передача данных между сервером и пользователем подошла к завершению, и все прошло так, как должно. 
+                    </li>
+                    <li><strong>201 Created ➕</strong> Ресурс создан</li>
+                    <li><strong>204 No Content 🗑 </strong> Этот код является ответом сервера, который указывает, что запрос получили и поняли. Но при этом не существует данных, которые могут быть отправлены пользователю.</li>
+                </ol>
+
+                
+                <h3>➡️ 3xx: Перенаправления</h3>
+                <ol>
+                    <li><strong>301 Moved Permanently 🔄</strong>Это общий запрос пользователя, который означает, что запросы на этот ресурс (а также запросы, которые последуют за ним) следует перенаправить на указанный URL 
+                    </li>
+                    <li><strong>302 Found ➡️</strong> Этот код говорит пользователю, что местоположение запрашиваемого веб-документа было временно изменено, а код состояния 302 включает данные о новом размещении, к которому пользователь может делать запрос(Временный редирект)</li>
+                </ol>
+
+                
+                <h3>😤 4xx: Клиентские фейлы</h3>
+                <ol>
+                    <li><strong>400 Bad Request ❌</strong>  Запрос не обрабатывается правильно в связи с синтаксической ошибкой.</li>
+                    <li><strong>401 Unauthorized 🔑</strong> Нет токена. Он имеет отношение к запросу ресурса, который нуждается в авторизации. Код 401 информирует, что предварительную авторизацию отклонили, поскольку переданные пользовательские данные были неверные</li>
+                    <li><strong>403 Forbidden 🚫</strong> Доступ запрещен. Пользователь пробует добиться доступа к веб-ресурсу, на который у него нет прав, а авторизация здесь никак не может помочь</li>
+                    <li><strong>404 Not Found ❓</strong>Большинство пользователей знакомо с 404 ошибкой. Она указывает на то, что искомый ресурс невозможно найти(страница удалена или вы ввели неверный адрес)</li>
+                </ol>
+
+                                
+                <h3>💥5xx: Ошибки сервера</h3>
+                <ol>
+                    <li><strong>500 Internal Server Error 🐛</strong>Этот статус сообщает о внутренней ошибке сервера, которая не совпадает с другими ошибками того же класса. Этот код используется, если ресурс или ссылка создается на сервере (например, календарь в системе резервирования), который технически не существует
+                    </li>
+                    <li><strong>503 Service Unavailable ⏳</strong> Код 503 означает, что возникли технические причины, из-за которых сервер на определенное время не способен обработать набор данных. Его допустимо использовать в случаях, когда на сайт есть повышенный спрос, но у сервера нет возможности обрабатывать все входящие запросы.</li>
+                </ol>
+
+                <p>Прочитать подробнее про каждый статус код из написанных или узнать про другие вы можете на моем сайте в разделе: </p>
+                <a href="https://qaspace.ru/instruments/status-kod" class="default-btn">Статус кода</a>
+
+                <p>Подписывайтесь на мой канал в ТГ:</p>
+                <a href="https://t.me/qualityAssuranceSpace" class="default-btn">Телеграм канал</a>
+                
             </div>
-        </section>
-    </main>
+
+        </div>
+    </article>
     <footer class="footer">
 	<div class="container">
 		<div class="header__inner">
@@ -227,7 +213,5 @@
 </footer>
 
 
-    <script src="../../js/dataAnalysis.bundle.js"></script>
+    <script src="../../js/article.bundle.js"></script>
 </body>
-
-</html>

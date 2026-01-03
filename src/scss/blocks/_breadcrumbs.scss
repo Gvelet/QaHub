@@ -1,0 +1,16 @@
+.breadcrumbs { 
+  display: flex; 
+  gap: 10px; 
+  font-size: 14px; 
+  color: #fff; 
+  margin-bottom: 20px;
+
+    & a { 
+        color: var(--color-element);
+        text-decoration: none; 
+    }
+    & a:hover { 
+        text-decoration: underline; 
+    }
+}
+

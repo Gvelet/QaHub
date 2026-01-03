@@ -18,7 +18,7 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
-		<link rel="stylesheet" href="./css/main.css" />
+		<link rel="stylesheet" href="./css/main.css"/>
 	</head>
 	<body>
 		@@include('blocks/header.html')
@@ -252,7 +252,7 @@
 									</div>
 								</a>
 
-								<a href="#" class="possibilities__item">
+								<a href="./blog/" class="possibilities__item">
 									<div class="possibilities__item-content">
 										<div class="possibilities__item-icon">
 											<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -450,40 +450,16 @@
 					</div>
 				</div>
 			</section>
-			<section class="blog">
+			<section class="blog__popular">
 				<div class="container">
-					<div class="blog__content">
-						<h2 class="blog__content-title  title">Блог</h2>
-						<p class="blog__content-text">В этом разделе вы найдете самые популярные статьи из раздела “Блог”.</p>
+					<div class="blog__popular__content">
+						<h2 class="blog__popular__content-title title">Популярные статьи</h2>
+						<p class="blog__popular__content-text">В этом разделе вы найдете самые популярные статьи из раздела “Блог”.</p>
 					</div>
-					<div class="blog__slider slider__content swiper">
-						<div class="swiper-wrapper">
-							<div class="swiper-slide">
-								<a href="" class="slider__content-item slider__content--blocked">
-									<img class="slider__content-img" src="./img/in-development.png" alt="slide-img">
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a href="" class="slider__content-item slider__content--blocked">
-									<img class="slider__content-img" src="./img/in-development.png" alt="slide-img">
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a href="" class="slider__content-item slider__content--blocked">
-									<img class="slider__content-img" src="./img/in-development.png" alt="slide-img">
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a href="" class="slider__content-item slider__content--blocked">
-									<img class="slider__content-img" src="./img/in-development.png" alt="slide-img">
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a href="" class="slider__content-item slider__content--blocked">
-									<img class="slider__content-img" src="./img/in-development.png" alt="slide-img">
-								</a>
-							</div>
-						</div>
+					<div class="blog__popular__slider slider__content swiper">
+						
+
+						<div class="swiper-wrapper blog__cards" id="homeBlogCards"></div>
 						
 						<div class="swiper-button-prev"></div>
 						<div class="swiper-button-next"></div>
@@ -497,5 +473,6 @@
 		@@include('blocks/footer.html')
 
 		<script src="./js/index.bundle.js"></script>
+		<script src="./js/blog.bundle.js"></script>
 	</body>
 </html>

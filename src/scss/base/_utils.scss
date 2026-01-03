@@ -42,3 +42,14 @@
         transform: translateX(-50%); 
     }
 }
+
+.default-btn{
+    display: inline-block;
+    background-color: #34c6c9;
+    color: #fff;
+    padding: 18px 40px;
+    border-radius: 6px;
+    font-family: inherit;
+    text-align: center;
+    transition: 0.3s;
+}
