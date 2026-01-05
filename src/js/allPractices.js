@@ -21,7 +21,7 @@ function loadJSON() {
 
 function displayData(data) {
     const contentDiv = document.getElementById('practicesWrapper');
-    data.forEach(item => {
+    data.forEach((item, index) => {
         const itemDiv = document.createElement('div');
         itemDiv.classList.add('practices__column');
         itemDiv.innerHTML = `
@@ -35,7 +35,10 @@ function displayData(data) {
                 </div>
             </a>
         `;
-        contentDiv.appendChild(itemDiv);
+        if (index === 0) {
+            contentDiv.appendChild(itemDiv);
+        }
+        
     });
 
 }
