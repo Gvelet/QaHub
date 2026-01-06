@@ -4,12 +4,23 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Статусы кодов | Quality Space</title>
+		<title>Проверка HTTP статус-кодов онлайн бесплатно | 200, 404, 500 | QA Space</title>
 		<meta property="og:type" content="website">
-		<meta property="og:url" content="https://qaspace.ru/statusCode.html">
-		<meta name="description" content="Узнайте о статусах кодов HTTP: читайте описание и значение каждого кода для улучшения понимания работы веб-приложений.">
+		<meta property="og:url" content="https://qaspace.ru/instruments/status-kod">
+		<meta name="description" content="Проверьте статус-код сайта: введите URL, получите код (200 OK, 404 Not Found, 500). Таблица объяснений, история проверок. Бесплатный инструмент для QA-тестировщиков.">
 		<meta name="keywords" content="статус коды HTTP, ошибки HTTP, коды состояния, диагностика ошибок, тестирование API, обработка ошибок, инструменты для проверки статуса, статус код 404, статус код 200, статус код 500, 503, 401, 403, статус код 301" />
-		<link rel="canonical" href="https://qaspace.ru/statusCode.html"/>
+		<link rel="canonical" href="https://qaspace.ru/instruments/status-kod"/>
+		<script type="application/ld+json">
+			{
+			"@context": "https://schema.org",
+			"@type": "SoftwareApplication",
+			"name": "HTTP Status Checker QA Space",
+			"description": "Онлайн-проверка статус-кодов HTTP",
+			"applicationCategory": "WebApplication",
+			"operatingSystem": "Web",
+			"offers": { "@type": "Offer", "price": "0" }
+			}
+		</script>
 		<link rel="icon" href="../../img/bugFavicon.ico" type="image/x-icon">
 		<link type="image/x-icon" href="../../img/bugFavicon.ico" rel="shortcut icon">
 		<link type="Image/x-icon" href="../../img/bugFavicon.ico" rel="icon">
@@ -26,7 +37,7 @@
 				<div class="container">
 					<div class="statuses__inner">
 						<div class="statuses__content">
-                            <h2 class="statuses__title title">Узнать статус код</h2>
+                            <h1 class="statuses__title title">Проверка статус-кодов HTTP</h1>
                             <p class="statuses__text">С помощью поиска ниже вы можете быстро найти любой статус-код. Введите, например, 200 и нажмите «Показать», чтобы прочитать информацию о статус-коде 200, или выберите нужный статус-код из списка.</p>
                         </div>
 
@@ -50,8 +61,12 @@
                             </div>
 						</div>
 					</div>
-
-						
+						<script type="application/ld+json">
+							[{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+							{"@type":"Question","name":"Что значит статус 404?","acceptedAnswer":{"@type":"Answer","text":"Страница не найдена на сервере."}},
+							{"@type":"Question","name":"Как проверить код сайта?","acceptedAnswer":{"@type":"Answer","text":"Введите URL в форму выше."}}
+							]}]
+						</script>
 						<div class="statuses__info" id="statuses__info"></div>
 					</div>
 				</div>
