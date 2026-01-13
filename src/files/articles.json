@@ -7,5 +7,14 @@
         "image": "../img/blog-status-kod.png",
         "category": "Теория",
         "date": "2026-01-03"
+    },
+    {
+        "slug": "kto-takoy-testirovshchik",
+        "title": "Кто такие тестировщики и чем они занимаются",
+        "showOnHome": false,
+        "description": "Хотите понять, кто такие QA и зачем они нужны? Разбираем уровни (Junior → Senior)",
+        "image": "../img/blog-kto-takoy-testirovshchik.jpg",
+        "category": "Основы QA",
+        "date": "2025-01-13"
     }
 ]
