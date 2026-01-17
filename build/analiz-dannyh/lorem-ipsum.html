@@ -4,12 +4,31 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=1220" />
-		<title>Тесты QA онлайн: Postman, DevTools, базовое тестирование | QA Space</title>
+		<title>Генератор Lorem Ipsum онлайн | Кириллица, Латиница | Бесплатно QA Space</title>
         <meta property="og:type" content="website">
-        <meta property="og:url" content="https://qaspace.ru/tests/">
-        <meta name="description" content="Пройдите тесты для QA: basic-testing, DevTools, Postman. Фильтр, поиск, прогресс. Сертификаты бесплатно. Подготовка к собеседованиям тестировщиков.">
-		<meta name="keywords" content="тесты для QA, проверка знаний тестировщиков, тесты по DevTools, тесты по Postman, сертификация QA, подготовка к экзаменам, тесты на знание методологий" />
-        <link rel="canonical" href="https://qaspace.ru/tests/"/>
+        <meta property="og:url" content="https://qaspace.ru/analiz-dannyh/lorem-ipsum">
+        <meta name="description" content="Генератор Lorem Ipsum онлайн: слова, предложения, абзацы на кириллице, латинице или смешанно. HTML-обертка, списки, классический старт. Бесплатный инструмент для дизайнеров и QA на qaspace.ru">
+		<meta name="keywords" content="генератор lorem ipsum, lorem ipsum кириллица, генератор текста, рыба текст онлайн, placeholder text, lorem ipsum русский, HTML lorem ipsum" />
+        <meta property="og:title" content="Генератор Lorem Ipsum онлайн | Кириллица, Латиница | Бесплатно QA Space">
+        <meta property="og:description" content="Генератор Lorem Ipsum онлайн: слова, предложения, абзацы на кириллице, латинице или смешанно. HTML-обертка, списки, классический старт. Бесплатный инструмент для дизайнеров и QA.">
+        <script type="application/ld+json">
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "WebApplication",
+                "name": "Генератор Lorem Ipsum | QA Space",
+                "description": "Бесплатный онлайн-генератор текста: слова, предложения, абзацы на кириллице, латинице, с HTML-оберткой и списками.",
+                "applicationCategory": "WebApplication",
+                "operatingSystem": "Web",
+                "url": "https://qaspace.ru/analiz-dannyh/lorem-ipsum",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "0"
+                }
+            }
+        </script>
+        </script>
+        <link rel="canonical" href="https://qaspace.ru/analiz-dannyh/lorem-ipsum"/>
         <link rel="icon" href="../../img/bugFavicon.ico" type="image/x-icon">
         <link type="image/x-icon" href="../../img/bugFavicon.ico" rel="shortcut icon">
 		<link type="Image/x-icon" href="../../img/bugFavicon.ico" rel="icon">
@@ -77,24 +96,73 @@
 
 
         <main class="main">
-            <section class="tests">
+            <section class="lorem">
                 <div class="container">
-                    <div class="tests__content section__content-block">
-                        <h1 class="tests__title title">Тесты для QA-инженеров</h1>
-                        <p class="tests__text">
-                            Проверьте свои знания в тестировании! Пройдите наш короткий тест и узнайте, насколько вы хорошо разбираетесь в этой области. Удачи!
-                        </p>
+                    <div class="lorem__content section__content-block">
+                        <h1 class="lorem__title title">Генератор текста с Lorem Ipsum</h1>
+                        <p class="lorem__text">Создавайте текст: слова, предложения, абзацы на русском, латинице или смешанно. Идеально для QA-тестов, веб-дизайна и макетов с HTML-оберткой.</p>
                     </div>
-                    <div class="tests__inner">
-                        <div class="tests__form">
-                            <select class="tests__form-category" name="" id="testsCategory">
-                                <option value="value1">Все тесты</option>
-                            </select>
-                            <div class="tests__search-inner">
-                                <input class="tests__search" placeholder="Поиск..." type="search" id="testsSearch"/>
+
+                    <div class="lorem-content">
+                        <div class="lorem-form-grid">
+                            <div class="lorem-form-group">
+                                <label for="lorem-type">Тип генерации</label>
+                                <select id="lorem-type">
+                                    <option value="words">Слова</option>
+                                    <option value="sentences" selected>Предложения</option>
+                                    <option value="paragraphs">Абзацы</option>
+                                </select>
+                            </div>
+
+                            <div class="lorem-form-group">
+                                <label for="lorem-count">Количество</label>
+                                <input type="number" id="lorem-count" value="5" min="1" max="1000">
+                            </div>
+
+                            <div class="lorem-form-group">
+                                <label for="lorem-language">Язык слов</label>
+                                <select id="lorem-language">
+                                    <option value="latin">Только латиница</option>
+                                    <option value="cyrillic">Только кириллица</option>
+                                    <option value="mixed" selected>Кириллица + Латиница</option>
+                                </select>
+                            </div>
+
+                            <div class="lorem-form-group">
+                                <label for="lorem-sentenceLength">Длина предложения (слова)</label>
+                                <input type="range" id="lorem-sentenceLength" min="4" max="20" value="12">
+                                <span class="lorem-form-group-word" id="lorem-sentenceLengthValue">12 слов</span>
                             </div>
                         </div>
-                        <div id="testsWrapper" class="tests__wrapper-tests"></div>
+
+                        <div class="lorem-checkbox-group">
+                            <div class="lorem-checkbox-item">
+                                <input type="checkbox" id="lorem-classicStart" checked>
+                                <label for="lorem-classicStart">Начинать с "Lorem ipsum dolor sit.."(От 12 символов)</label>
+                            </div>
+                            <div class="lorem-checkbox-item">
+                                <input type="checkbox" id="lorem-htmlWrap">
+                                <label for="lorem-htmlWrap">Добавить HTML-обёртку (&lt;p&gt;)</label>
+                            </div>
+                            <div class="lorem-checkbox-item">
+                                <input type="checkbox" id="lorem-lists">
+                                <label for="lorem-lists">Генерировать как список &lt;ul&gt;&lt;li&gt;</label>
+                            </div>
+                        </div>
+
+                        <div class="lorem-buttons">
+                            <button class="lorem-btn lorem-btn-primary" id="lorem-generateBtn">🎲 Сгенерировать</button>
+                            <button class="lorem-btn lorem-btn-secondary" id="lorem-clearBtn">🗑️ Очистить</button>
+                            <button class="lorem-btn lorem-btn-secondary" id="lorem-copyBtn">📋 Скопировать</button>
+                        </div>
+
+                        <div class="lorem-result-container" id="lorem-resultContainer">
+                            <textarea id="lorem-result" placeholder="Результат появится здесь... Нажмите 'Сгенерировать' для создания текста."></textarea>
+                            <div class="lorem-result-stats">
+                                <span id="lorem-stats">0 символов | 0 слов</span>
+                            </div>
+                            <div class="lorem-copy-success" id="lorem-copySuccess">Скопировано! ✅</div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -159,6 +227,6 @@
 </footer>
 
 
-        <script src="../../js/tests.bundle.js"></script>
+        <script src="../../js/loremIpsum.bundle.js"></script>
     </body>
 </html>

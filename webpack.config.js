@@ -12,7 +12,8 @@ const config = {
 		allPractices: './src/js/allPractices.js',
 		practic: './src/js//practic.js',
 		blog: './src/js/blog.js',
-		article: './src/js/article.js'
+		article: './src/js/article.js',
+		loremIpsum: './src/js/loremIpsum.js'
 
 	},
 	output: {
