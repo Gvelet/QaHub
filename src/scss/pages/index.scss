@@ -1449,38 +1449,66 @@
   }
 }
 
+.blog-table {
+  width: 100%;
+  max-width: 800px;
+  margin: 20px 0;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  font-family: system-ui, sans-serif;
+  font-size: 15px;
 
-// Мобильные
-@media (max-width: 768px) {
-  .page-404 {
-    padding: 80px 0 100px;
-    
-    &__text {
-      font-size: 16px;
-      margin-bottom: 32px;
+  thead th {
+    padding: 15px 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: 600;
+    font-size: 13px;
+    text-align: left;
+  }
+
+  thead th:nth-child(1) { background: #ef4444; }
+  thead th:nth-child(2) { background: #10b981; }
+  thead th:nth-child(3) { background: #f59e0b; }
+  thead th:nth-child(4) { background: #ec4899; }
+  thead th:nth-child(5) { background: #3b82f6; }
+
+  tbody tr {
+    &:hover {
+      background: rgba(99, 102, 241, 0.05);
     }
-    
-    &__links .default-btn {
-      padding: 16px 36px;
-      font-size: 15px;
+
+    &:nth-child(even) {
+      background: rgba(0,0,0,0.02);
+    }
+
+    td {
+      padding: 14px 12px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    td:first-child {
+      font-weight: 700;
+      background: #f3f4f6;
+      text-align: center;
+      color: #374151;
     }
   }
 }
 
-@media (max-width: 480px) {
-  .page-404 {
-    padding: 60px 0 80px;
+@media (max-width: 640px) {
+  .blog-table {
+    font-size: 14px;
+    border-radius: 8px;
     
-    &__code {
-      -webkit-text-stroke: 1.5px #000;
-    }
-    
-    &__links .default-btn {
-      padding: 14px 32px;
-      font-size: 14px;
+    th, td {
+      padding: 12px 8px;
     }
   }
 }
+
 
 // Lorem
 .lorem{

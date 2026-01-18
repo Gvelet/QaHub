@@ -14,7 +14,18 @@
         "showOnHome": false,
         "description": "Хотите понять, кто такие QA и зачем они нужны? Разбираем уровни (Junior → Senior)",
         "image": "../img/blog-kto-takoy-testirovshchik.jpg",
-        "category": "Основы QA",
+        "category": "Теория",
         "date": "2025-01-13"
+    },
+    {
+        "slug": "tekhniki-test-dizayna",
+        "title": "Техники тест-дизайна: EP, BVA, Pairwise с примерами",
+        "showOnHome": true,
+        "description": "3 ключевые техники для создания тест-кейсов: меньше тестов, больше багов!",
+        "image": "../img/blog-tekhniki-test-dizayna.png",
+        "category": "Теория",
+        "date": "2026-01-17"
     }
+
+
 ]
