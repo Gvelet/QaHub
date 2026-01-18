@@ -45,7 +45,6 @@ class LoremGenerator {
         };
 
         this.bindEvents();
-        this.toggleListCheckbox();
         this.toggleSentenceLength();
         this.toggleClassicStart(); 
         setTimeout(() => this.generateLorem(), 500);
@@ -56,7 +55,35 @@ class LoremGenerator {
             this.elements.sentenceLengthValue.textContent = `${e.target.value} слов`;
         });
 
-        this.elements.htmlWrap.addEventListener('change', () => this.toggleListCheckbox());
+        // ✅ ВЗАИМОИСКЛЮЧАЮЩИЕ ЧЕКБОКСЫ
+        // HTML Wrap (параграфы) → отключает списки
+        this.elements.htmlWrap.addEventListener('change', () => {
+            if (this.elements.htmlWrap.checked) {
+                this.elements.lists.checked = false;
+                this.elements.lists.disabled = true;
+                const listItem = this.elements.lists.closest('.lorem-checkbox-item');
+                if (listItem) listItem.classList.add('disabled');
+            } else {
+                this.elements.lists.disabled = false;
+                const listItem = this.elements.lists.closest('.lorem-checkbox-item');
+                if (listItem) listItem.classList.remove('disabled');
+            }
+        });
+        
+        // Lists (списки) → отключает HTML Wrap
+        this.elements.lists.addEventListener('change', () => {
+            if (this.elements.lists.checked) {
+                this.elements.htmlWrap.checked = false;
+                this.elements.htmlWrap.disabled = true;
+                const htmlItem = this.elements.htmlWrap.closest('.lorem-checkbox-item');
+                if (htmlItem) htmlItem.classList.add('disabled');
+            } else {
+                this.elements.htmlWrap.disabled = false;
+                const htmlItem = this.elements.htmlWrap.closest('.lorem-checkbox-item');
+                if (htmlItem) htmlItem.classList.remove('disabled');
+            }
+        });
+
         this.elements.generateBtn.addEventListener('click', () => this.generateLorem());
         this.elements.clearBtn.addEventListener('click', () => this.clearResult());
         this.elements.copyBtn.addEventListener('click', () => this.copyToClipboard());
@@ -81,21 +108,6 @@ class LoremGenerator {
             e.preventDefault();
             this.elements.resultContainer.classList.remove('dragover');
         });
-    }
-
-    toggleListCheckbox() {
-        const htmlWrapChecked = this.elements.htmlWrap.checked;
-        this.elements.lists.disabled = !htmlWrapChecked;
-        
-        const checkboxItem = this.elements.lists.closest('.lorem-checkbox-item');
-        if (checkboxItem) {
-            if (!htmlWrapChecked) {
-                this.elements.lists.checked = false;
-                checkboxItem.classList.add('disabled');
-            } else {
-                checkboxItem.classList.remove('disabled');
-            }
-        }
     }
 
     toggleSentenceLength() {
@@ -153,7 +165,7 @@ class LoremGenerator {
 
         this.elements.result.value = result;
         this.updateStats(result);
-        this.elements.previewMode.textContent = settings.htmlWrap ? 'HTML' : 'Текст';
+        this.elements.previewMode.textContent = settings.htmlWrap || settings.lists ? 'HTML' : 'Текст';
     }
 
     generateWords(count, settings) {
@@ -174,9 +186,9 @@ class LoremGenerator {
 
         for (let i = 0; i < count; i++) {
             if (i === 0 && settings.classicStart) {
-            sentences.push(this.CLASSIC_LOREM);
+                sentences.push(this.CLASSIC_LOREM);
             } else {
-            sentences.push(this.generateSentence(settings));
+                sentences.push(this.generateSentence(settings));
             }
         }
 
@@ -203,7 +215,7 @@ class LoremGenerator {
     }
 
     generateSentence(settings) {
-         const wordCount = settings.sentenceLength;
+        const wordCount = settings.sentenceLength;
         const words = this.getWordPool(settings.language, wordCount);
         let sentence = words.slice(0, wordCount).join(' ');
         sentence = sentence.charAt(0).toUpperCase() + sentence.slice(1);
@@ -250,25 +262,23 @@ class LoremGenerator {
     }
 
     wrapHtml(text, settings) {
-        if (!settings.htmlWrap) {
+        if (!settings.htmlWrap && !settings.lists) {
             return text;
         }
         
         const paragraphs = text.split('\n\n');
         
-        if (settings.lists && settings.htmlWrap) {
+        if (settings.lists) {
             const items = paragraphs.slice(0, 10).map(p => `<li>${p.trim()}</li>`);
             return `<ul>\n${items.join('\n')}\n</ul>`;
         }
         
+        // HTML-обертка (параграфы)
         return paragraphs.map(p => `<p>${p.trim()}</p>`).join('\n');
     }
 
     updateStats(text) {
-        // убираем HTML теги для точного подсчёта
         const cleanText = text.replace(/<[^>]*>/g, '').trim();
-        
-        // слова: разделяем по пробелам, фильтруем пустые
         const words = cleanText.split(/\s+/).filter(word => word.length > 0);
         const chars = cleanText.length;
         
