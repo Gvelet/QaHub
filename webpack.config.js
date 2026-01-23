@@ -13,7 +13,8 @@ const config = {
 		practic: './src/js//practic.js',
 		blog: './src/js/blog.js',
 		article: './src/js/article.js',
-		loremIpsum: './src/js/loremIpsum.js'
+		loremIpsum: './src/js/loremIpsum.js',
+		jsonValidator: './src/js/jsonValidator.js'
 
 	},
 	output: {

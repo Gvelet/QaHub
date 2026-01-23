@@ -1,22 +1,38 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=1220" />
-    <title>Анализ данных для тестировщиков | Quality Space</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Валидатор JSON онлайн бесплатно | Проверка и форматирование JSON | QA Space</title>
+    <meta name="description" content="Онлайн валидатор JSON: проверка, форматирование, минификация, подсветка ошибок. Идеально для QA-тестеров, разработчиков. Бесплатно, мгновенно.">
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://qaspace.ru/analiz-dannyh/">
-    <meta name="description" content="Используйте наш функционал для анализа данных: подсчет символов, слов и специальных символов для повышения точности тестирования.">
-    <meta name="keywords" content="анализ данных, тестирование данных, инструменты для анализа, визуализация данных, статистика тестирования, обработка данных, анализ производительности" />
-    <link rel="canonical" href="https://qaspace.ru/analiz-dannyh/"/>
-    <link rel="icon" href="../../img/bugFavicon.ico" type="image/x-icon">
-    <link type="image/x-icon" href="../../img/bugFavicon.ico" rel="shortcut icon">
-    <link type="Image/x-icon" href="../../img/bugFavicon.ico" rel="icon">
+    <meta property="og:url" content="https://qaspace.ru/analiz-dannyh/json-validator">
+    <meta property="og:title" content="JSON Валидатор | QA Space">
+    <meta property="og:description" content="JSON валидатор, проверка JSON, форматирование JSON, минификация JSON. Инструмент для QA-инженеров при тестировании API.">
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "Валидатор JSON QA Space",
+            "description": "Онлайн-инструмент для проверки, форматирования и минификации JSON",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "Web",
+            "offers": { "@type": "Offer", "price": "0" }
+        }
+    </script>
+    <!-- Favicon -->
+    <link rel="canonical" href="https://qaspace.ru/analiz-dannyh/json-validator">
+    <link rel="icon" href="/img/bugFavicon.ico" type="image/x-icon">
+    <link type="image/x-icon" href="/img/bugFavicon.ico" rel="shortcut icon">
+    <link type="image/x-icon" href="/img/bugFavicon.ico" rel="icon">
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/main.css" />
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
     <header class="header">
@@ -76,100 +92,121 @@
 </header>
 
     <main class="main">
-        <section class="instruments">
+        <section class="json-validator">
             <div class="container">
-                <div class="instruments__inner">
-                    <div class="instruments__content section__content-block">
-                        <h2 class="instruments__title title">Анализ данных</h2>
-                        <p class="instruments__text default__content-text">
-                            Используйте инструменты для повышения эффективности работы. Стандартный подсчет символов, JSON парсер, генерация различных данных
-                        </p>
-                    </div>
-                    <div class="instruments__colums">
-                        <a href="podschet-simvolov" class="instruments__item instruments__item--unblocked">
-                            <div class="instruments__item-content">
-                                <h4 class="instruments__item-title">Подсчет символов</h4>
+                <div class="json-validator__inner">
+                    <div class="json-validator__content">
+                        <div class="json-validator__content section__content-block">
+                            <h1 class="json-validator__title title">Валидатор JSON</h1>
+                            <p class="json-validator__text default__content-text">Онлайн-инструмент для проверки, форматирования, минификации JSON с подсветкой ошибок и нумерацией строк. Идеально для QA-тестирования API и работы с данными.</p>
+                        </div>
+
+                        <div class="json-validator__wrapper">
+                            <div class="json-validator__panel" id="editorPanel">
+                                <div class="json-validator__lines" id="lines">
+                                    <div class="json-validator__line-num">1</div>
+                                </div>
+                                <div class="json-validator__editor-container">
+                                    <textarea class="json-validator__editor" id="editor" placeholder="Введите или вставьте JSON здесь..."></textarea>
+                                    <button class="copy-btn" id="copyBtn" title="Копировать">📋</button>
+                                </div>
                             </div>
-                            <img class="instruments__img--active" src="../../img/instruments-podschet.png" alt="slide-img">
-                        </a>
-                        <a href="lorem-ipsum" class="instruments__item instruments__item--unblocked">
-                           <div class="instruments__item-content">
-                                <h4 class="instruments__item-title">Генератор текста</h4>
+
+                            <div class="json-validator__controls">
+                                <div class="json-validator__buttons">
+                                    <select class="json-validator__select" id="examples">
+                                        <option value="">Добавить пример</option>
+                                        <option value="valid-mini">Валидный мини-JSON</option>
+                                        <option value="valid-large">Валидный большой JSON</option>
+                                        <option value="invalid">Невалидный JSON</option>
+                                    </select>
+                                    <button class="json-validator__btn json-validator__btn--primary" id="check">Проверить</button>
+                                    <button class="json-validator__btn" id="format">Форматировать</button>
+                                    <button class="json-validator__btn" id="minify">Минифицировать</button>
+                                    <button class="json-validator__btn" id="exportBtn">Экспорт</button>
+                                    <button class="json-validator__btn" id="clear">Очистить</button>
+                                </div>
+                                <div class="json-validator__status" id="status">
+                                    <span class="json-validator__status-icon"></span>
+                                    <span></span>
+                                </div>
                             </div>
-                            <img class="instruments__img--active" src="../../img/lorem-Ipsum-Bg.png" alt="slide-img">
-                        </a>
-                        <a href="json-validator" class="instruments__item instruments__item--unblocked">
-                           <div class="instruments__item-content">
-                                <h4 class="instruments__item-title">Валидатор JSON</h4>
-                            </div>
-                            <img class="instruments__img--active" src="../../img/json-validator.jpg" alt="slide-img">
-                        </a>
-                        <a href="" class="instruments__item instruments__item--blocked">
-                            <img class="instruments__img" src="../../img/in-development.png" alt="slide-img">
-                        </a>
-                        <a href="" class="instruments__item instruments__item--blocked">
-                            <img class="instruments__img" src="../../img/in-development.png" alt="slide-img">
-                        </a>
-                        <a href="" class="instruments__item instruments__item--blocked">
-                            <img class="instruments__img" src="../../img/in-development.png" alt="slide-img">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="feedback">
-            <div class="container">
-                <div class="feedback__inner">
-                    <h3 class="feedback__title">Есть идеи как улучшить сайт. Нашли баг? Хотите добавить новый функционал? Пишите</h3>
-                    <div class="feedback__social">
-                        <a class="feedback__social-link" href="https://t.me/qualityAssuranceSpace">Телеграм канал</a>
-                        <a class="feedback__social-link" href="mailto:milemx1106@gmail.com">milemx1106@gmail.com</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="materials">
-            <div class="container">
-                <div class="materials__inner">
-                    <div class="materials__content">
-                        <h2 class="materials__content-title title">Похожие материалы</h2>
-                        <p class="materials__content-text">Тут собраны статьи/тесты которые помогут вам в работе с предоставленными выше инструментами</p>
+                        </div>
                     </div>
 
-                    <div class="materials__slider slider__content swiper">
-						<div class="swiper-wrapper">
-							<div class="swiper-slide">
-								<a href="" class="slider__content-item slider__content--blocked">
-									<img class="slider__content-img" src="../../img/in-development.png" alt="slide-img">
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a href="" class="slider__content-item slider__content--blocked">
-									<img class="slider__content-img" src="../../img/in-development.png" alt="slide-img">
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a href="" class="slider__content-item slider__content--blocked">
-									<img class="slider__content-img" src="../../img/in-development.png" alt="slide-img">
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a href="" class="slider__content-item slider__content--blocked">
-									<img class="slider__content-img" src="../../img/in-development.png" alt="slide-img">
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a href="" class="slider__content-item slider__content--blocked">
-									<img class="slider__content-img" src="../../img/in-development.png" alt="slide-img">
-								</a>
-							</div>
-						</div>
-						
-						<div class="swiper-button-prev"></div>
-						<div class="swiper-button-next"></div>
+                    <!-- Новый контент под валидатором -->
+                    <div class="json-validator__content">
+                        <section class="content-block">
+                            <h2>Что такое JSON и зачем валидировать</h2>
+                            <p>
+                                JSON (JavaScript Object Notation) — это легковесный формат обмена данными, который широко используется 
+                                в веб-API, конфигурационных файлах и базах данных. Валидация JSON нужна для проверки корректности 
+                                структуры данных перед отправкой на сервер или обработкой в тестах.
+                            </p>
+                            <p>
+                                Неправильный JSON может привести к ошибкам 400 Bad Request в API, сбоям в автоматизированных тестах 
+                                и потере времени на отладку.
+                            </p>
+                        </section>
 
-						<div class="swiper-pagination"></div>
-					</div>
+                        <section class="content-block">
+                            <h2>Типичные ошибки JSON в тестировании API</h2>
+                            <div class="error-examples">
+                                <div class="error-example">
+                                    <h3>1. Лишняя запятая (Trailing comma)</h3>
+                                    <pre class="error-invalid">{
+  "name": "test",
+  "id": 123,
+}</pre>
+                                    <pre class="error-valid">{
+  "name": "test",
+  "id": 123
+}</pre>
+                                </div>
+                                <div class="error-example">
+                                    <h3>2. Незакрытые кавычки</h3>
+                                    <pre class="error-invalid">{
+  "status": "error
+}</pre>
+                                    <pre class="error-valid">{
+  "status": "error"
+}</pre>
+                                </div>
+                                <div class="error-example">
+                                    <h3>3. Неправильные комментарии</h3>
+                                    <pre class="error-invalid">{
+  "user": {
+    "active": true // пользователь активен
+  }
+}</pre>
+                                    <pre class="error-valid">{
+  "user": {
+    "active": true
+  },
+  "_comment": "пользователь активен"
+}</pre>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="content-block">
+                            <h2>Как QA может использовать JSON-валидатор в повседневной работе</h2>
+                            <ol class="tutorial-steps">
+                                <li>
+                                    <strong>Тестирование API:</strong> Копируйте ответы из Postman/Insomnia и проверяйте валидность JSON.
+                                </li>
+                                <li>
+                                    <strong>Автоматизация тестов:</strong> Генерируйте тестовые данные в формате JSON для Playwright/Cypress.
+                                </li>
+                                <li>
+                                    <strong>Документация:</strong> Форматируйте JSON для читаемости в отчетах и спецификациях.
+                                </li>
+                                <li>
+                                    <strong>Schema validation:</strong> Комбинируйте с JSON Schema для проверки структуры данных.
+                                </li>
+                            </ol>
+                        </section>
+                    </div>
                 </div>
             </div>
         </section>
@@ -232,8 +269,7 @@
 	</div>
 </footer>
 
-
-    <script src="../../js/dataAnalysis.bundle.js"></script>
+    
+    <script src="/js/jsonValidator.bundle.js"></script>
 </body>
-
 </html>
