@@ -1150,7 +1150,7 @@
 
   &__cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 360px));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 340px));
     gap: 30px;
     margin-bottom: 60px;
     justify-content: start;
@@ -1334,7 +1334,8 @@
   padding: 60px 20px;
 
   &-post {
-    max-width: 800px;
+    display: flex;
+    justify-content: space-between;
   }
 
   & img {
@@ -1448,6 +1449,10 @@
     border-top: 1px solid #333333;
     margin: 40px 0;
   }
+
+}
+.post__content-article{
+    margin-right: 40px;
 }
 
 .blog-table {
@@ -1497,6 +1502,12 @@
       color: #374151;
     }
   }
+}
+
+@media (max-width: 1220px) {
+    .post-content-post{
+        display: block;
+    }
 }
 
 @media (max-width: 640px) {
