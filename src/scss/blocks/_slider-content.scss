@@ -13,7 +13,7 @@
         background-color: #111111;
     }
     &-item{
-        max-width: 285px;
+        max-width: 350px;
         height: 370px;
         overflow: hidden;
         transition: all 0.3s;
@@ -64,5 +64,19 @@
         z-index: 1;
         background-color: #000;
         opacity: .45;
+    }
+}
+
+@media(max-width: 1024px){
+    .slider__content{
+        padding: 0 10px;
+        padding-bottom: 60px;
+    }
+    .slider__content .swiper-pagination-bullet {
+        width: 20px;
+        height: 20px;
+    }
+    .swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet, .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
+        margin: 0 10px;
     }
 }

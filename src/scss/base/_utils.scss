@@ -43,6 +43,12 @@
     }
 }
 
+@media(max-width: 820px){
+    .title{
+        font-size: 34px;
+    }
+}
+
 .default-btn{
     display: inline-block;
     background-color: #34c6c9;
@@ -59,8 +65,15 @@
 	max-width: 853px;
 	margin: 0 auto;
 	margin-bottom: 50px;
+    margin-top: 70px
+}
+
+@media(max-width: 768px){
+    .section__content-block{
+        margin-top: 40px;
+    }
 }
 
 .default__content-text{
-    font-size: 20px;
+    font-size: clamp(14px, 3vw, 20px);
 }

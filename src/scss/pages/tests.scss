@@ -1,0 +1,112 @@
+.tests{
+    padding-top: 70px;
+    &__inner{
+        margin-bottom: 40px;
+    }
+    &__title{
+        margin-bottom: 30px;
+    }
+    &__form{
+        display: flex;
+        justify-content: center;
+        gap: 80px;
+    }
+    &__form-category{
+        background-color: #ffffff;
+        border: 1px solid #3f3f3f;
+        border-radius: 8px;
+        font-size: 14px;
+        line-height: 16px;
+        font-weight: 400;
+        color: #000000;
+        width: 275px;
+        padding: 8px 5px;
+        cursor: pointer;
+    }
+    &__form-category option{
+        background-color: #fff;
+        color: #000000;
+    }
+    &__search{
+        background-color: #ffffff;
+        border: 1px solid #3f3f3f;
+        border-radius: 8px;
+        font-size: 14px;
+        line-height: 16px;
+        font-weight: 400;
+        color: #000000;
+        width: 275px;
+        padding: 10px 5px;
+        cursor: pointer;
+    }
+    &__wrapper-tests{
+        margin-top: 25px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+    &-item{
+        display: flex;
+        background-color: #fff;
+        padding: 12px 15px;
+        height: 100px;
+    }
+    &__item-icon{
+        margin-right: 24px;
+        height: 70px;
+    }
+    &__item-title{
+        color: #000;
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 3px;
+    }
+    &__item-description{
+        font-size: 18px;
+        color: #000;
+        max-width: 420px;
+    }
+}
+
+@media(max-width: 1150px){
+    .tests{
+        &__wrapper-tests{
+            display: block;
+            max-width: 600px;
+            margin: 50px auto 30px;
+        }
+        &-item{
+            margin-bottom: 20px;
+        }
+    }
+}
+
+@media(max-width: 768px){
+    .tests{
+        &__form{
+            gap: 20px;
+        }
+        &__wrapper-tests{
+            margin-top: 20px;
+        }
+    }
+}
+
+@media(max-width: 580px){
+    .tests{
+        &__form{
+            display: block;
+            justify-content: center;
+            align-items: center;
+        }
+        &__form-category{
+            margin-bottom: 20px;
+        }
+        &-item{
+            height: auto;
+        }
+        &__item-description{
+            font-size: 16px;
+        }
+    }
+}

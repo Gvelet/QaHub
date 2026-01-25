@@ -4,7 +4,19 @@
             <a href="/" class="header__logo-link">
                 <img src="/img/logo.svg" alt="logo" class="header__logo-img">
             </a>
-            @@include('menu.html')
+            <button class="burger" aria-label="Открыть меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="menu">
+               @@include('menu.html')     
+            </nav>
         </div>
+    </div>
+    <div class="menu-mobile">
+        <nav>
+            @@include('menu.html') 
+        </nav>
     </div>
 </header>

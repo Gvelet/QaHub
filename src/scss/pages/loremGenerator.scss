@@ -1,0 +1,214 @@
+.lorem{
+    padding-top: 70px;
+    padding-bottom: 90px;
+    &__title{
+        margin-bottom: 30px;
+    }
+    &-form-grid{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+        margin-bottom: 30px;
+    }
+    &-form-group{
+        display: flex;
+        flex-direction: column;
+    }
+    &-form-group label{
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #999;
+        font-size: 0.95em;
+    }
+
+    &-form-group input,
+    &-form-group select{
+        padding: 12px 15px;
+        border: 2px solid #e1e5e9;
+        border-radius: 10px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        font-family: inherit;
+    }
+
+    &-form-group:focus{
+        outline: none;
+        border-color: #4facfe;
+        box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+    }
+
+    &-form-group-word{
+        font-size: 16px;
+        text-align: center;
+        margin-top: 5px;
+    }
+
+    &-checkbox-group{
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 25px;
+    }
+    &-checkbox-item{
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        cursor: pointer;
+        padding: 8px;
+        padding: 12px 16px;
+        border-radius: 8px;
+        position: relative;
+        transition: background 0.2s ease
+    }
+
+    &-checkbox-item.disabled{
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    &-checkbox-item.disabled:hover{
+        background: transparent !important;
+    }
+    &-checkbox-item input[type="checkbox"]{
+        width: 18px;
+        height: 18px;
+        accent-color: #4facfe;
+        flex-shrink: 0; 
+        margin-top: 2px; 
+        cursor: pointer; 
+    }
+    &-checkbox-item input[type="checkbox"]:disabled{
+         opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    &-checkbox-item label{
+        cursor: pointer;
+        user-select: none; 
+        flex: 1; 
+        margin: 0;
+        line-height: 1.4;
+    }
+    &-buttons{
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+    }
+    &-btn{
+        padding: 14px 28px;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    &-btn.lorem-btn-primary {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        color: white;
+        box-shadow: 0 8px 20px rgba(79, 172, 254, 0.3);
+    }
+    &-btn.lorem-btn-primary:hover{
+        transform: translateY(-2px);
+        box-shadow: 0 12px 25px rgba(79, 172, 254, 0.4);
+    }
+    &-btn.lorem-btn-secondary{
+        background: #f8f9fa;
+        color: #666;
+        border: 2px solid #e9ecef;
+    }
+    &-btn.lorem-btn-secondary:hover{
+        background: #e9ecef;
+        transform: translateY(-1px);
+    }
+    &-result-container{
+        background: #f8f9fa;
+        border: 2px dashed #dee2e6;
+        border-radius: 15px;
+        padding: 25px;
+        min-height: 300px;
+        position: relative;
+    }
+    &-result-container.dragover{
+        border-color: #4facfe;
+        background: #f0f8ff;
+    }
+    &-copy-success{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #28a745;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-size: 0.85em;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+    }
+    &-copy-success.show{
+        opacity: 1;
+        transform: translateY(0);
+    }
+    &-result-stats{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid #dee2e6;
+        font-size: 0.9em;
+        color: #666;
+    }
+
+    &-form-group.sentence-length-disabled {
+        opacity: 0.5;
+        pointer-events: none;
+
+        label {
+            color: #ccc;
+        }
+
+        &-word {
+            color: #ccc;
+        }
+    }
+}
+
+
+#lorem-result {
+    width: 100%;
+    min-height: 250px;
+    border: none;
+    background: transparent;
+    font-size: 15px;
+    line-height: 1.6;
+    resize: vertical;
+    padding: 15px;
+    color: #333;
+
+    &::placeholder {
+        color: #adb5bd;
+        font-style: italic;
+    }
+
+    &:focus {
+        outline: none;
+        box-shadow: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .lorem-form-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .lorem-header h1 {
+        font-size: 1.8em;
+    }
+}

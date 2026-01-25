@@ -1,0 +1,198 @@
+.resized{
+    padding-top: 70px;
+    padding-bottom: 90px;
+    &__functional{
+        margin-right: 65px;
+    }
+    &__title{
+        font-size: clamp(26px, 3vw, 48px);
+        line-height: 1.2;
+        margin-bottom: 20px;
+    }
+    &__text{
+        font-size: clamp(14px, 3vw, 22px);
+        text-align: center;
+    }
+    &__wpapper{
+        display: flex;
+        justify-content: center;
+    }
+    &__select-upload{
+        margin-bottom: 20px;
+    }
+    &__upload-label{
+        display: block;
+        font-size: 12px;
+        line-height: 16px;
+        font-weight: 400;
+        color: #fff;
+        margin-bottom: 4px;
+    }
+    &__select{
+        background-color: #ffffff;
+        border: 1px solid #3f3f3f;
+        border-radius: 8px;
+        font-size: 14px;
+        line-height: 16px;
+        font-weight: 400;
+        color: #000000;
+        width: 275px;
+        padding: 8px 5px;
+        cursor: pointer;
+    }
+    &__select option{
+        background-color: #fff;
+        color: #000000;
+    }
+    &__file-upload{
+        margin-bottom: 40px;
+    }
+    &__file-input,
+    &__file-choose {
+        padding: 10px 7px;
+        border: none;
+        font-size: 12px;
+    }
+    &__file-choose{
+        border-radius: 8px 0 0 8px;
+        background-color: #D5DDE5;
+        color: #000;
+    }
+    &__file-btn{
+        background-color: lightgray;
+        cursor: pointer;
+    }
+    &__file-input{
+        background-color: #333;
+        color: white;
+        width: 200px;
+    }
+    &__file-close{
+        background-color: #607D8B; 
+        color: white;
+        padding: 10px 15px;
+        border-radius: 0 8px 8px 0;
+        font-size: 12px;
+        height: 35px;
+    }
+    &__upload-dimensions{
+        margin-bottom: 20px;
+    }
+    &__functional-title,
+    &__dimensions-title{
+        text-align: center;
+        color: #fff;
+        margin-bottom: 15px;
+    }
+    &__dimensions-inner{
+        display: flex;
+        align-items: center;
+        gap: 30px;
+    }
+    &__dimensions-input{
+        background-color: #ffffff;
+        color: #000;
+        border-radius: 5px;
+        width: 160px;
+        padding: 10px 5px;
+    }
+    &__upload-download{
+        text-align: center;
+    }
+    &__upload-button{
+        background-color: #999999;
+        color: #fff;
+        padding: 13px 15px;
+        border-radius: 8px;
+        margin-bottom: 7px;
+        transition: all .5s;
+    }
+    &__upload-button:hover{
+        background-color: #55B4D4;
+    }
+    &__new-size{
+        font-size: 12px;
+        line-height: 16px;
+        font-weight: 400;
+        color: #fff;
+    }
+    &-img{
+        width: 350px;
+        height: 350px;
+        border: 1px solid #fff;
+    }
+    &__image-text{
+        margin-bottom: 5px;
+        font-size: 12px;
+        line-height: 16px;
+        font-weight: 400;
+        color: #fff;
+    }
+    &__initial-size{
+        margin-top: 4px;
+        font-size: 12px;
+        line-height: 16px;
+        font-weight: 400;
+        color: #fff;
+    }
+}
+
+@media(max-width: 830px){
+    .resized{
+        &__functional{
+            margin-right: 30px;
+        }
+        &__file-input{
+            width: 150px;
+        }
+    }
+}
+
+@media(max-width: 768px){
+    .resized{
+        &__wpapper{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        &__functional,
+        &__wrapper-images{
+            display: contents;
+        }
+        &__upload-container{
+            order: 0;
+        }
+        &__wrapper-images{
+            order: 1;
+
+        }
+        &__upload-dimensions{
+            margin-top: 20px;
+            order: 2;
+        }
+        &__upload-download{
+            order: 3;
+        }
+
+        &__dimensions-inner{
+            gap: 15px;
+        }
+
+        &__functional-title,
+        &__dimensions-title{
+            font-size: 18px;
+        }
+        &__dimensions-inner{
+            justify-content: center;
+        }
+        &__upload-download{
+            margin-bottom: 30px;
+        }
+        &__image-text{
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+    }
+}

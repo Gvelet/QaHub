@@ -1,0 +1,102 @@
+.practic{
+    margin-top: 70px;
+    padding-bottom: 90px;
+    &__functional{
+        margin-right: 65px;
+    }
+    &__content{
+        padding-bottom: 50px;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding-top: 70px;
+    }
+    &__title{
+        margin-bottom: 20px;
+    }
+    &__text{
+        font-size: clamp(14px, 3vw, 20px);
+        text-align: center;
+    }
+    &__wrapper{
+        display: flex;
+        justify-content: space-between;
+    }
+    &__wrapper-form{
+        display: flex;
+        height: auto;
+        align-items: start;
+    }
+    &__wrapper-input{
+        background-color: #ffffff;
+        color: #000;
+        border-radius: 8px;
+        width: 215px;
+        padding: 13px 5px;
+    }
+    &__wrapper-btn{
+        background-color: #999999;
+        padding: 13px 37px;
+        color: #fff;
+        border-radius: 8px;
+        text-align: center;
+        margin-left: 4px;
+        transition: all .3s;
+    }
+    &__wrapper-submit:hover{
+        background-color: #55B4D4;
+    }
+    &__wrapper-text{
+        font-size: 22px;
+        color: #fff;
+        margin-bottom: 10px;
+    }
+    &__wrapper-list{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    &_wrapper-info-text{
+        font-size: 20px;
+        color: #fff;
+    }
+}
+
+@media(max-width: 1000px){
+    .practic{
+        &__wrapper{
+            display: block;
+        }
+        &__wrapper-form{
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+    }
+}
+
+@media(max-width: 768px){
+    .practic{
+        margin-top: 40px;
+        &_wrapper-info-text{
+            font-size: 16px;
+        }
+        &__wrapper-text p{
+            font-size: 18px;
+        }
+    }
+}
+
+@media(max-width: 400px){
+    .practic{
+        &__wrapper-form{
+            display: block;
+        }
+        &__wrapper-input{
+            margin-bottom: 15px;
+            width: 100%;
+        }
+        &__wrapper-btn{
+            width: 100%;
+        }
+    }
+}
+

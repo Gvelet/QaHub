@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=1220" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Подсчет символов, слов, букв онлайн бесплатно | Анализ текста | QA Space</title>
         <meta property="og:type" content="website">
         <meta property="og:url" content="https://qaspace.ru/analiz-dannyh/podschet-simvolov">
@@ -60,11 +60,11 @@
                                     <div class="counting__counter-num" id="wordCount">0</div>
                                 </div>
                                 <div class="counting__wrapper-column">
-                                    <div class="counting__counter-title">Всего кириллических символов</div>
+                                    <div class="counting__counter-title">Кириллических символов</div>
                                     <div class="counting__counter-num" id="cyrillicChars">0</div>
                                 </div>
                                 <div class="counting__wrapper-column">
-                                    <div class="counting__counter-title">Всего латинских символов</div>
+                                    <div class="counting__counter-title">Латинских символов</div>
                                     <div class="counting__counter-num" id="latinChars">0</div>
                                 </div>
                                 <div class="counting__wrapper-column">
@@ -84,6 +84,7 @@
 
         @@include('../blocks/footer.html')
 
+        <script src="../../js/index.bundle.js"></script>
         <script src="../../js/characterCounting.bundle.js"></script>
     </body>
 </html>

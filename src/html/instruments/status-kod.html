@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=1220" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Проверка HTTP статус-кодов онлайн бесплатно | 200, 404, 500 | QA Space</title>
 		<meta property="og:type" content="website">
 		<meta property="og:url" content="https://qaspace.ru/instruments/status-kod">
@@ -47,7 +47,7 @@
 								<button class="statuses__wrapper-submit">Показать</button>
 							</div>
 							<div class="statuses__wrapper-selects">
-								<select class="statuses__selects-groups" id="statusesSelectGroups">
+								<select class="statuses__selects-groups" id="statusesSelectGroups" >
 									<option value="1">1xx</option>
 									<option value="2">2xx</option>
 									<option value="3">3xx</option>
@@ -75,6 +75,7 @@
 
         @@include('../blocks/footer.html')
 
+		<script src="../../js/index.bundle.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
         <script src="../../js/statusCode.bundle.js"></script>
     </body>
