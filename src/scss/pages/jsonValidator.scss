@@ -153,6 +153,7 @@
         gap: 12px;
         animation: fadeIn 0.3s ease;
         max-width: 600px;
+        display: none;
 
         &--success {
             background: rgba(76, 175, 80, 0.2);
@@ -311,6 +312,11 @@
     
     .json-validator__buttons {
         flex-direction: column;
+        margin-bottom: 30px;
+    }
+
+    .json-validator__controls {
+        flex-direction: column-reverse;
     }
 }
 

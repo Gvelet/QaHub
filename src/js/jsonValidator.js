@@ -493,7 +493,8 @@ class JsonValidator {
             <span>${msg}</span>
         `;
         this.status.className = `json-validator__status json-validator__status--${type}`;
-        this.status.classList.remove('json-validator__status--hidden');
+        // this.status.classList.remove('json-validator__status--hidden');
+        this.status.style.display = 'block';
 
         if (autoHide) {
             this.statusTimeout = setTimeout(this.hideStatus.bind(this), 3000);
@@ -505,7 +506,8 @@ class JsonValidator {
             clearTimeout(this.statusTimeout);
             this.statusTimeout = null;
         }
-        this.status.classList.add('json-validator__status--hidden');
+        // this.status.classList.add('json-validator__status--hidden');
+        this.status.style.display = 'none';
     }
 }
 
