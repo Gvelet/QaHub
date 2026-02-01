@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="ru">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Тесты QA онлайн: Postman, DevTools, базовое тестирование | QA Space</title>
-        <meta property="og:type" content="website">
-        <meta property="og:url" content="https://qaspace.ru/tests/">
-        <meta name="description" content="Пройдите тесты для QA: basic-testing, DevTools, Postman. Фильтр, поиск, прогресс. Сертификаты бесплатно. Подготовка к собеседованиям тестировщиков.">
-		<meta name="keywords" content="тесты для QA, проверка знаний тестировщиков, тесты по DevTools, тесты по Postman, сертификация QA, подготовка к экзаменам, тесты на знание методологий" />
-        <link rel="canonical" href="https://qaspace.ru/tests/"/>
-        <link rel="icon" href="../../img/bugFavicon.ico" type="image/x-icon">
-        <link type="image/x-icon" href="../../img/bugFavicon.ico" rel="shortcut icon">
-		<link type="Image/x-icon" href="../../img/bugFavicon.ico" rel="icon">
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-		<link rel="stylesheet" href="../../css/main.css" />
-	</head>
-    <body>
-        <header class="header">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Онлайн тесты для QA: Большое количество тестов по тестированию | Quality Space</title>
+    <meta name="description" content="Каталог онлайн тестов для тестировщиков QA: основы, техники тест-дизайна, SQL, API (HTTP/Postman/DevTools), виды тестирования, HTML/CSS. 13+ тестов, 35+ вопросов каждый – проверьте знания бесплатно!" />
+    <meta name="keywords" content="онлайн тесты QA, тесты для тестировщиков, SQL QA, API тестирование, техники тест-дизайна, виды тестирования, Postman DevTools, HTTP статус-коды, регрессионное тестирование" />
+    <meta name="shenma" content="онлайн тесты QA каталог, QA testing quizzes SQL API Postman DevTools test design types, 13+ QA tests free" />
+    <meta name="baidu" content="QA тесты онлайн каталог SQL API" />
+    <meta name="yandex" content="тесты для QA инженеров все темы" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Каталог тестов для QA – проверьте навыки различных тестах" />
+    <meta property="og:description" content="Все онлайн тесты для QA: от основ и SQL до API/Postman, видов тестирования и DevTools. Выберите категорию и начните" />
+    <meta property="og:url" content="https://qaspace.ru/tests/" />
+    <link rel="canonical" href="https://qaspace.ru/tests/" />
+    <link rel="icon" href="../img/bugFavicon.ico" type="image/x-icon">
+    <link type="image/x-icon" href="../img/bugFavicon.ico" rel="shortcut icon" />
+    <link type="Image/x-icon" href="../img/bugFavicon.ico" rel="icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/main.css" />
+</head>
+<body>
+  <header class="header">
     <div class="container">
         <div class="header__inner">
             <a href="/" class="header__logo-link">
@@ -128,29 +133,27 @@
     </div>
 </header>
 
-
-        <main class="main">
-            <section class="tests">
-                <div class="container">
-                    <div class="tests__content section__content-block">
-                        <h1 class="tests__title title">Тесты для QA-инженеров</h1>
-                        <p class="tests__text default__content-text">
-                            Проверьте свои знания в тестировании! Пройдите наш короткий тест и узнайте, насколько вы хорошо разбираетесь в этой области. Удачи!
-                        </p>
-                    </div>
-                    <div class="tests__inner">
-                        <div class="tests__form">
-                            <select class="tests__form-category" name="" id="testsCategory">
-                                <option value="value1">Все тесты</option>
-                            </select>
-                            <div class="tests__search-inner">
-                                <input class="tests__search" placeholder="Поиск..." type="search" id="testsSearch"/>
-                            </div>
-                        </div>
-                        <div id="testsWrapper" class="tests__wrapper-tests"></div>
-                    </div>
-
-                     <section class="promo-footer-section">
+  <main class="main">
+    <section class="tests">
+      <div class="container">
+        <div class="tests__content section__content-block">
+          <h1 class="tests__title title">Тесты для QA-инженеров</h1>
+          <p class="tests__text default__content-text">Проверьте свои знания в тестировании! Пройдите наш короткий тест и узнайте, насколько вы хорошо разбираетесь в этой области. Удачи!</p>
+        </div>
+        <div class="tests__inner">
+          <div class="tests__form">
+            <select class="tests__form-category" id="testsCategory">
+              <option value="all">Все тесты</option>
+            </select>
+            <div class="tests__search-inner">
+              <input class="tests__search" placeholder="Поиск..." type="search" id="testsSearch"/>
+            </div>
+          </div>
+          <div id="testsWrapper" class="tests__wrapper-tests"></div>
+          <div id="testsPagination" class="tests__pagination"></div>
+          <div id="testsEmpty" class="tests__empty" style="display: none;">Тесты не найдены</div>
+        </div>
+        <section class="promo-footer-section">
     <div class="promo-footer">
     <div class="promo-footer__inner">
         <div class="promo-footer__icon">📱</div>
@@ -163,12 +166,10 @@
     </div>
     </div>
 </section>
-                </div>
-            </section>
-           
-        </main>
-
-        <footer class="footer">
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
 	<div class="container">
 		<div class="footer__inner">
 			<a href="/" class="header__logo-link">
@@ -226,8 +227,7 @@
 	</div>
 </footer>
 
-
-        <script src="../../js/index.bundle.js"></script>
-        <script src="../../js/tests.bundle.js"></script>
-    </body>
+  <script src="../../js/index.bundle.js"></script>
+  <script src="../../js/tests.bundle.js"></script>
+</body>
 </html>
