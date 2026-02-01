@@ -99,6 +99,9 @@ function startCountdown(testData) {
 function createTestHtml(testData) { 
   const question = testData.questions[currentQuestionIndex]; 
   const totalQuestions = testData.questions.length; 
+
+  const shuffledAnswers = [...question.answers].sort(() => Math.random() - 0.5);
+
   return ` 
     <div class="tests-start"> 
       <div class="tests-start__top"> 
@@ -125,12 +128,16 @@ function createTestHtml(testData) {
         <div class="tests-start__answers"> 
           <h4 class="tests-start__answers-title">Варианты ответа:</h4> 
           <ul class="tests-start__answers-list"> 
-            ${question.answers.map((answer, index) => ` 
-              <li class="tests-start__answers-item"> 
-                <input type="radio" name="answer" id="answer-${index}" class="tests-start__answer-input"> 
-                <label for="answer-${index}" class="tests-start__answer-label">${escapeHtml(answer.text)}</label> 
-              </li> 
-            `).join('')} 
+            ${shuffledAnswers.map((answer, shuffledIndex) => {
+            // ✅ НАХОДИМ ОРИГИНАЛЬНЫЙ ИНДЕКС ПРАВИЛЬНОГО ОТВЕТА
+            const originalAnswerIndex = question.answers.findIndex(a => a === answer);
+            return `
+                <li class="tests-start__answers-item">
+                <input type="radio" name="answer" id="answer-${shuffledIndex}" class="tests-start__answer-input" data-original-index="${originalAnswerIndex}">
+                <label for="answer-${shuffledIndex}" class="tests-start__answer-label">${escapeHtml(answer.text)}</label>
+                </li>
+            `;
+            }).join('')} 
           </ul> 
         </div> 
       </div> 
@@ -170,12 +177,11 @@ function addAnswerListeners(testData) {
 function handleAnswerSelection(testData) {
   const selectedInput = document.querySelector('input[name="answer"]:checked');
   if (selectedInput) {
-    const answerList = selectedInput.closest('ul');
-    const selectedAnswerIndex = Array.from(answerList.children).indexOf(selectedInput.closest('li'));
+    const originalAnswerIndex = parseInt(selectedInput.dataset.originalIndex);
     const correctAnswerIndex = testData.questions[currentQuestionIndex].answers.findIndex(a => a.isCorrect);
     
-    userSelectedAnswers[currentQuestionIndex] = selectedAnswerIndex;
-    userAnswers[currentQuestionIndex] = (selectedAnswerIndex === correctAnswerIndex);
+    userSelectedAnswers[currentQuestionIndex] = originalAnswerIndex;
+    userAnswers[currentQuestionIndex] = (originalAnswerIndex === correctAnswerIndex);
     
     currentQuestionIndex++;
     if (currentQuestionIndex < testData.questions.length) {
@@ -187,6 +193,7 @@ function handleAnswerSelection(testData) {
     alert('Выберите ответ!');
   }
 }
+
 
 
 function userStatusTest(testData, userLevels) { 
@@ -201,73 +208,61 @@ let resultsData = null;
 function showAllAnswers(testData) {
   showAnswersMode = true;
   let html = `
-    <section class="test-results">
-      <div class="container">
-        <div class="test-results__inner">
-          <div class="test-results__btns-top">
-            <a class="test-results__btns-again" href="${window.location.origin}/tests/${testData.key}">Пройти еще раз</a>
-            <button id="back-to-results" class="test-results__btns-back">Назад к результатам</button>
-          </div>
-          
-          <div class="test-results__top">
-            <h3 class="test-results__title">Все ответы: "${testData.title}"</h3>
-          </div>
-          <div class="test-results__answers-review">
-  `;
-  
+ <section class="test-results">
+ <div class="container">
+ <div class="test-results__inner">
+ <div class="test-results__btns-top">
+ <a class="test-results__btns-again" href="${window.location.origin}/tests/${testData.key}">Пройти еще раз</a>
+ <button id="back-to-results" class="test-results__btns-back">Назад к результатам</button>
+ </div>
+ <div class="test-results__top">
+ <h3 class="test-results__title">Все ответы: "${testData.title}"</h3>
+ </div>
+ <div class="test-results__answers-review"> 
+ `;
+
   testData.questions.forEach((question, qIndex) => {
     const userCorrect = userAnswers[qIndex] === true;
     const correctAnswerIndex = question.answers.findIndex(a => a.isCorrect);
     
     html += `
-      <div class="answers-review-question">
-        <div class="answers-review-question__header">
-          <h4>Вопрос ${qIndex + 1}: ${question.question}</h4>
-          <span class="answers-review-result ${userCorrect ? 'correct' : 'wrong'}">
-            ${userCorrect ? '✅ Правильно' : '❌ Неправильно'}
-          </span>
-        </div>
-        ${question.image ? `<img class="answers-review-question__image" src="../../img/${question.image}" alt="Картинка">` : ''}
-        <ul class="answers-review-question__list">
-    `;
-    
-    question.answers.forEach((answer, aIndex) => {
-    const isCorrect = aIndex === correctAnswerIndex;
-    const userSelected = userSelectedAnswers[qIndex]; // ✅ ТОЧНЫЙ индекс!
-    
-    let classes = 'answers-review-answer';
-    
-    // ✅ ТОЧНАЯ ЛОГИКА:
-    if (isCorrect && userSelected === aIndex) {
-        classes += ' correct user-selected';  // Правильный + выбран
-    } else if (isCorrect) {
-        classes += ' correct';               // Только правильный
-    } else if (userSelected === aIndex) {
-        classes += ' wrong user-selected';   // ❌ Выбранный + неправильный
-    }
-    
-    html += `
-    <li class="${classes}">
-        <span class="answer-bullet"></span>
-        <span>${escapeHtml(answer.text)}</span>
-    </li>
-    `;
-    });
+ <div class="answers-review-question">
+ <div class="answers-review-question__header">
+ <h4>Вопрос ${qIndex + 1}: ${question.question}</h4>
+ <span class="answers-review-result ${userCorrect ? 'correct' : 'wrong'}">
+ ${userCorrect ? '✅ Правильно' : '❌ Неправильно'}
+ </span>
+ </div>
+ ${question.image ? `<img class="answers-review-question__image" src="../../img/${question.image}" alt="Картинка">` : ''}
+ <ul class="answers-review-question__list">`;
 
+    question.answers.forEach((answer, originalIndex) => {
+      const isCorrect = originalIndex === correctAnswerIndex;
+      const userSelected = userSelectedAnswers[qIndex];
+      
+      let classes = 'answers-review-answer';
+      if (isCorrect && userSelected === originalIndex) {
+        classes += ' correct user-selected';
+      } else if (isCorrect) {
+        classes += ' correct';
+      } else if (userSelected === originalIndex) {
+        classes += ' wrong user-selected';
+      }
+      
+      html += `
+ <li class="${classes}">
+ <span class="answer-bullet"></span>
+ <span>${escapeHtml(answer.text)}</span>
+ </li>`;
+    });
     
     html += `</ul></div>`;
   });
-  
-  html += `
-          </div>
-        </div>
-      </div>
-    </section>
-  `;
+
+  html += ` </div> </div> </div> </section> `;
   
   contentDiv.innerHTML = html;
   
-  // ✅ Обработчик кнопки "Назад"
   const backBtn = document.getElementById('back-to-results');
   if (backBtn) {
     backBtn.addEventListener('click', () => {
@@ -276,6 +271,7 @@ function showAllAnswers(testData) {
     });
   }
 }
+
 
 function displayResults(testData) { 
   if (countdownInterval) clearInterval(countdownInterval); 
@@ -332,5 +328,7 @@ const decryptData = (encryptedData) => {
     return '[]'; 
   } 
 }; 
+
+
 
 document.addEventListener('DOMContentLoaded', loadTests);
