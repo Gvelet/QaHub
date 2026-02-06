@@ -25,7 +25,7 @@ jobs:
       run: ls -la ./docs/ 
 
     - name: Deploy to FTP reg.ru
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.7
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.6
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
