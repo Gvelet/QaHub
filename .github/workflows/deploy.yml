@@ -33,4 +33,4 @@ jobs:
         local-dir: './docs/'
         server-dir: '/www/qaspace.ru/'
         dangerous-clean-slate: true
-        log-level: 2
+        log-level: verbose
