@@ -129,7 +129,6 @@ function createTestHtml(testData) {
           <h4 class="tests-start__answers-title">Варианты ответа:</h4> 
           <ul class="tests-start__answers-list"> 
             ${shuffledAnswers.map((answer, shuffledIndex) => {
-            // ✅ НАХОДИМ ОРИГИНАЛЬНЫЙ ИНДЕКС ПРАВИЛЬНОГО ОТВЕТА
             const originalAnswerIndex = question.answers.findIndex(a => a === answer);
             return `
                 <li class="tests-start__answers-item">
