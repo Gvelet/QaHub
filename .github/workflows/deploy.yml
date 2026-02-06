@@ -1,0 +1,36 @@
+name: Deploy to reg.ru ONLY
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.19.4'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build with Gulp 
+      run: gulp docs
+
+    - name: List docs folder (DEBUG)
+      run: ls -la ./docs/ 
+
+    - name: Deploy to FTP reg.ru
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.7
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: './docs/'
+        server-dir: '/www/qaspace.ru/'
+        dangerous-clean-slate: true
+        log-level: 2  
