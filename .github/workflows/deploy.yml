@@ -1,4 +1,4 @@
-name: Deploy to reg.ru ONLY
+name: Deploy to reg.ru FAST & SAFE
 on:
   push:
     branches: [ main ]
@@ -13,7 +13,7 @@ jobs:
         node-version: '20.19.4'
     - name: Install dependencies
       run: npm ci
-    - name: Build PROD (no server)
+    - name: Build PROD
       run: |
         npx gulp clean:docs
         npx gulp html:docs
@@ -21,8 +21,8 @@ jobs:
         npx gulp images:docs
         npx gulp fonts:docs
         npx gulp files:docs
-        npx gulp js:docs  # ← все задачи ПОМЕДЛЕННО!
-    - name: List docs folder (DEBUG)
+        npx gulp js:docs
+    - name: List docs
       run: ls -la ./docs/
     - name: Deploy to FTP reg.ru
       uses: SamKirkland/FTP-Deploy-Action@v4.3.6
@@ -32,5 +32,10 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: './docs/'
         server-dir: '/www/qaspace.ru/'
-        dangerous-clean-slate: true
+        exclude: |
+          **/.htaccess
+          **/sitemap.xml
+          **/robots.txt
+          **/.gitkeep
+        dangerous-clean-slate: false 
         log-level: verbose
