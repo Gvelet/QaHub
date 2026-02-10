@@ -51,14 +51,15 @@ jobs:
       with:
         github-token: ${{ secrets.TESTS_PAT }}
         script: |
-          console.log("🔄 Запускаю тесты...");
-          const response = await github.rest.actions.createWorkflowDispatch({
+          console.log("🔄 Запускаю тесты QASpace-AQA-tests...");
+          await github.rest.actions.createWorkflowDispatch({
             owner: 'Gvelet',
             repo: 'QASpace-AQA-tests',
             workflow_id: 'playwright.yml',
             ref: 'main'
           });
-          console.log("✅ Тесты запущены! ID:", response.data.id);
+          console.log("✅ ТРИГГЕР ОТПРАВЛЕН! Тесты запускаются...");
+          console.log("📊 Проверь: https://github.com/Gvelet/QASpace-AQA-tests/actions");
     
     - name: ⏳ Wait for Tests Result
       if: success()
@@ -66,7 +67,7 @@ jobs:
       with:
         github-token: ${{ secrets.TESTS_PAT }}
         script: |
-          console.log("⏳ Жду завершения тестов...");
+          console.log("⏳ Жду завершения тестов (5 мин)...");
           const timeout = Date.now() + 5 * 60 * 1000;
           
           while (Date.now() < timeout) {
@@ -77,24 +78,25 @@ jobs:
               per_page: 1
             });
             
-            if (workflows.data.length === 0) {
-              console.log("⏳ Нет новых тестов...");
+            if (!workflows.data || workflows.data.length === 0) {
+              console.log("⏳ Нет запусков тестов...");
               await new Promise(r => setTimeout(r, 30000));
               continue;
             }
             
             const latest = workflows.data[0];
-            console.log(`📊 ${latest.status} | ${latest.conclusion || 'in progress'}`);
+            console.log(`📊 Статус: ${latest.status} | Результат: ${latest.conclusion || 'выполняется'}`);
             
             if (latest.conclusion === 'success') {
-              console.log('🎉 Тесты ПРОШЛИ! ✅');
+              console.log('🎉 Тесты ПРОШЛИ! Деплой УСПЕШЕН! ✅');
               return;
             }
             if (latest.conclusion === 'failure') {
-              console.log('💥 Тесты УПАЛИ! ❌');
-              throw new Error('Тесты провалились!');
+              console.log('💥 Тесты УПАЛИ! Деплой ОТМЕНЕН! ❌');
+              throw new Error(`Тесты провалились: ${latest.html_url}`);
             }
             
+            console.log("⏳ Жду 30 сек...");
             await new Promise(r => setTimeout(r, 30000));
           }
-          throw new Error('⏰ Таймаут: тесты не завершились');
+          throw new Error('⏰ Таймаут: тесты не завершились за 5 минут');
