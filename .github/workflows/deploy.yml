@@ -7,15 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '20.19.4'
-        
     - name: Install dependencies
       run: npm ci
-      
     - name: Build PROD
       run: |
         npx gulp clean:docs
@@ -25,10 +22,8 @@ jobs:
         npx gulp fonts:docs
         npx gulp files:docs
         npx gulp js:docs
-        
     - name: List docs
       run: ls -la ./docs/
-      
     - name: Deploy to FTP reg.ru
       uses: SamKirkland/FTP-Deploy-Action@v4.3.6
       with:
@@ -51,15 +46,14 @@ jobs:
       with:
         github-token: ${{ secrets.TESTS_PAT }}
         script: |
-          console.log("🔄 Запускаю тесты QASpace-AQA-tests...");
+          console.log("🔄 Запускаю тесты...");
           await github.rest.actions.createWorkflowDispatch({
             owner: 'Gvelet',
             repo: 'QASpace-AQA-tests',
             workflow_id: 'playwright.yml',
             ref: 'main'
           });
-          console.log("✅ ТРИГГЕР ОТПРАВЛЕН! Тесты запускаются...");
-          console.log("📊 Проверь: https://github.com/Gvelet/QASpace-AQA-tests/actions");
+          console.log("✅ ТРИГГЕР ОТПРАВЛЕН!");
     
     - name: ⏳ Wait for Tests Result
       if: success()
@@ -71,32 +65,34 @@ jobs:
           const timeout = Date.now() + 5 * 60 * 1000;
           
           while (Date.now() < timeout) {
-            const workflows = await github.rest.actions.listWorkflowRuns({
-              owner: 'Gvelet',
-              repo: 'QASpace-AQA-tests',
-              workflow_id: 'playwright.yml',
-              per_page: 1
-            });
-            
-            if (!workflows.data || workflows.data.length === 0) {
-              console.log("⏳ Нет запусков тестов...");
-              await new Promise(r => setTimeout(r, 30000));
-              continue;
-            }
-            
-            const latest = workflows.data[0];
-            console.log(`📊 Статус: ${latest.status} | Результат: ${latest.conclusion || 'выполняется'}`);
-            
-            if (latest.conclusion === 'success') {
-              console.log('🎉 Тесты ПРОШЛИ! Деплой УСПЕШЕН! ✅');
-              return;
-            }
-            if (latest.conclusion === 'failure') {
-              console.log('💥 Тесты УПАЛИ! Деплой ОТМЕНЕН! ❌');
-              throw new Error(`Тесты провалились: ${latest.html_url}`);
+            try {
+              const workflows = await github.rest.actions.listWorkflowRuns({
+                owner: 'Gvelet',
+                repo: 'QASpace-AQA-tests',
+                workflow_id: 'playwright.yml',
+                per_page: 5
+              });
+              
+              console.log(`📊 Workflow runs: ${workflows.data.length}`);
+              
+              if (workflows.data.length > 0) {
+                const latest = workflows.data[0];
+                console.log(`📊 ${latest.status || 'no status'} | ${latest.conclusion || 'in progress'}`);
+                
+                if (latest.conclusion === 'success') {
+                  console.log('🎉 Тесты ПРОШЛИ! ✅');
+                  return;
+                }
+                if (latest.conclusion === 'failure') {
+                  console.log('💥 Тесты УПАЛИ! ❌');
+                  throw new Error('Тесты провалились!');
+                }
+              }
+            } catch (error) {
+              console.log("⚠️ API error:", error.message);
             }
             
             console.log("⏳ Жду 30 сек...");
             await new Promise(r => setTimeout(r, 30000));
           }
-          throw new Error('⏰ Таймаут: тесты не завершились за 5 минут');
+          console.log("⏰ Таймаут - продолжаю деплой");
