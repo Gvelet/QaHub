@@ -21,3 +21,5 @@ gulp.task(
 		gulp.parallel('server:docs')
 	)
 );
+
+gulp.task('docs', gulp.series('docs:build-only', 'server:docs'));
