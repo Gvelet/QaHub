@@ -1,98 +1,91 @@
-name: Deploy to reg.ru FAST & SAFE
+name: Deploy to reg.ru w/ Tests Gate
 on:
   push:
     branches: [ main ]
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20.19.4'
-    - name: Install dependencies
-      run: npm ci
-    - name: Build PROD
-      run: |
-        npx gulp clean:docs
-        npx gulp html:docs
-        npx gulp sass:docs
-        npx gulp images:docs
-        npx gulp fonts:docs
-        npx gulp files:docs
-        npx gulp js:docs
-    - name: List docs
-      run: ls -la ./docs/
-    - name: Deploy to FTP reg.ru
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.6
-      with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: './docs/'
-        server-dir: '/www/qaspace.ru/'
-        exclude: |
-          **/.htaccess
-          **/sitemap.xml
-          **/robots.txt
-          **/.gitkeep
-        dangerous-clean-slate: false 
-        log-level: verbose
-    
-    - name: 🚀 Trigger qaspace-tests
-      if: success()
-      uses: actions/github-script@v7
-      with:
-        github-token: ${{ secrets.TESTS_PAT }}
-        script: |
-          console.log("🔄 Запускаю тесты...");
-          await github.rest.actions.createWorkflowDispatch({
-            owner: 'Gvelet',
-            repo: 'QASpace-AQA-tests',
-            workflow_id: 'playwright.yml',
-            ref: 'main'
-          });
-          console.log("✅ ТРИГГЕР ОТПРАВЛЕН!");
-    
-    - name: ⏳ Wait for Tests Result
-      if: success()
-      uses: actions/github-script@v7
-      with:
-        github-token: ${{ secrets.TESTS_PAT }}
-        script: |
-          console.log("⏳ Жду завершения тестов (5 мин)...");
-          const timeout = Date.now() + 5 * 60 * 1000;
-          
-          while (Date.now() < timeout) {
-            try {
-              const workflows = await github.rest.actions.listWorkflowRuns({
+      - uses: actions/checkout@v4  # ✅ Код сайта
+      
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.19.4'  # ✅ Твой Node
+      
+      - name: Install deps
+        run: npm ci  # ✅ Быстро
+      
+      - name: Build PROD  # ✅ Твоя сборка без изменений
+        run: npx gulp docs
+      
+      - name: List docs  # ✅ Debug
+        run: ls -la ./docs/
+      
+      # 🚀 НОВОЕ: ТРИГГЕР + ЖДЕМ ТЕСТЫ (5 мин макс)
+      - name: 🔧 Trigger & Wait Tests  # ✅ БЛОК если fail
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.TESTS_PAT }}  # ✅ Твой PAT
+          script: |
+            // 1. ТРИГГЕР тестов
+            console.log('🚀 Trigger tests...');
+            const trigger = await github.rest.actions.createWorkflowDispatch({
+              owner: 'Gvelet',
+              repo: 'QASpace-AQA-tests',
+              workflow_id: 'playwright.yml',  # ✅ Точное имя файла
+              ref: 'main'
+            });
+            const runId = trigger.data.id;
+            console.log(`✅ Triggered run ID: ${runId}`);
+
+            // 2. POLL статус (по workflow_id + свежие)
+            console.log('⏳ Polling tests (5min max)...');
+            const timeout = Date.now() + 5*60*1000;  # ✅ 5 мин
+            const pollInterval = 30000;  # ✅ 30 сек
+
+            while (Date.now() < timeout) {
+              const { data: runs } = await github.rest.actions.listWorkflowRuns({
                 owner: 'Gvelet',
                 repo: 'QASpace-AQA-tests',
-                workflow_id: 'playwright.yml',
-                per_page: 5
+                workflow_id: 'playwright.yml',  # ✅ Фильтр по ID workflow!
+                per_page: 1  # ✅ Только последний
               });
               
-              console.log(`📊 Workflow runs: ${workflows.data.length}`);
-              
-              if (workflows.data.length > 0) {
-                const latest = workflows.data[0];
-                console.log(`📊 ${latest.status || 'no status'} | ${latest.conclusion || 'in progress'}`);
+              if (runs.total_count === 0) {
+                console.log('⏳ No runs yet...');
+              } else {
+                const latest = runs.workflow_runs[0];
+                console.log(`📊 Run ${latest.id}: ${latest.status} | ${latest.conclusion}`);
                 
                 if (latest.conclusion === 'success') {
-                  console.log('🎉 Тесты ПРОШЛИ! ✅');
-                  return;
+                  console.log('🎉 TESTS PASSED! ✅ Proceed to deploy');
+                  return;  # ✅ Продолжаем FTP
                 }
                 if (latest.conclusion === 'failure') {
-                  console.log('💥 Тесты УПАЛИ! ❌');
-                  throw new Error('Тесты провалились!');
+                  console.log('💥 TESTS FAILED! ❌ Abort deploy');
+                  process.exit(1);  # ✅ КРАСНЫЙ JOB!
                 }
               }
-            } catch (error) {
-              console.log("⚠️ API error:", error.message);
+              await new Promise(r => setTimeout(r, pollInterval));
             }
-            
-            console.log("⏳ Жду 30 сек...");
-            await new Promise(r => setTimeout(r, 30000));
-          }
-          console.log("⏰ Таймаут - продолжаю деплой");
+            console.log('⏰ Timeout - assume failed');
+            process.exit(1);  # ✅ Красный если не завершился
+
+      # ✅ FTP ТОЛЬКО если тесты green
+      - name: Deploy FTP reg.ru  # ✅ Без изменений
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: './docs/'
+          server-dir: '/www/qaspace.ru/'
+          exclude: |
+            **/.htaccess
+            **/sitemap.xml
+            **/robots.txt
+            **/.gitkeep
+          dangerous-clean-slate: false
+          log-level: verbose
