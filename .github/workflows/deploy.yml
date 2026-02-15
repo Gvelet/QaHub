@@ -18,7 +18,14 @@ jobs:
         run: npm ci  # ✅ Быстро
       
       - name: Build PROD  # ✅ Твоя сборка без изменений
-        run: npx gulp docs:build-only
+        run: |
+            npx gulp clean:docs
+            npx gulp html:docs  
+            npx gulp sass:docs
+            npx gulp images:docs
+            npx gulp fonts:docs
+            npx gulp files:docs
+            npx gulp js:docs
       
       - name: List docs  # ✅ Debug
         run: ls -la ./docs/
