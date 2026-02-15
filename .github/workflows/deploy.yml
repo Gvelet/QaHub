@@ -43,11 +43,11 @@ jobs:
               workflow_id: "playwright.yml",
               ref: "main"
             });
-            console.log(`✅ Triggered run ID: ${trigger.data.id}`);
+            console.log("✅ Tests triggered! Waiting...");
             
-            console.log("⏳ Polling tests (5min max)...");
-            const timeout = Date.now() + 5*60*1000;
-            const pollInterval = 30000;
+            // Poll последние runs workflow'а
+            const timeout = Date.now() + 5*60*1000; // 5 мин
+            const pollInterval = 30000; // 30 сек
             
             while (Date.now() < timeout) {
               const { data: runs } = await github.rest.actions.listWorkflowRuns({
@@ -70,6 +70,9 @@ jobs:
                 if (latest.conclusion === "failure") {
                   console.log("💥 TESTS FAILED! ❌ Abort deploy");
                   process.exit(1);
+                }
+                if (latest.status === "completed") {
+                  console.log("❓ Unknown conclusion:", latest.conclusion);
                 }
               }
               await new Promise(r => setTimeout(r, pollInterval));
