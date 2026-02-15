@@ -31,54 +31,52 @@ jobs:
         run: ls -la ./docs/
       
       # 🚀 НОВОЕ: ТРИГГЕР + ЖДЕМ ТЕСТЫ (5 мин макс)
-      - name: 🔧 Trigger & Wait Tests  # ✅ БЛОК если fail
+      - name: 🔧 Trigger & Wait Tests
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.TESTS_PAT }}  # ✅ Твой PAT
+          github-token: ${{ secrets.TESTS_PAT }}
           script: |
-            // 1. ТРИГГЕР тестов
-            console.log('🚀 Trigger tests...');
+            console.log("🚀 Trigger tests...");
             const trigger = await github.rest.actions.createWorkflowDispatch({
-              owner: 'Gvelet',
-              repo: 'QASpace-AQA-tests',
-              workflow_id: 'playwright.yml',  # ✅ Точное имя файла
-              ref: 'main'
+              owner: "Gvelet",
+              repo: "QASpace-AQA-tests",
+              workflow_id: "playwright.yml",
+              ref: "main"
             });
-            const runId = trigger.data.id;
-            console.log(`✅ Triggered run ID: ${runId}`);
-
-            // 2. POLL статус (по workflow_id + свежие)
-            console.log('⏳ Polling tests (5min max)...');
-            const timeout = Date.now() + 5*60*1000;  # ✅ 5 мин
-            const pollInterval = 30000;  # ✅ 30 сек
-
+            console.log(`✅ Triggered run ID: ${trigger.data.id}`);
+            
+            console.log("⏳ Polling tests (5min max)...");
+            const timeout = Date.now() + 5*60*1000;
+            const pollInterval = 30000;
+            
             while (Date.now() < timeout) {
               const { data: runs } = await github.rest.actions.listWorkflowRuns({
-                owner: 'Gvelet',
-                repo: 'QASpace-AQA-tests',
-                workflow_id: 'playwright.yml',  # ✅ Фильтр по ID workflow!
-                per_page: 1  # ✅ Только последний
+                owner: "Gvelet",
+                repo: "QASpace-AQA-tests",
+                workflow_id: "playwright.yml",
+                per_page: 1
               });
               
               if (runs.total_count === 0) {
-                console.log('⏳ No runs yet...');
+                console.log("⏳ No runs yet...");
               } else {
                 const latest = runs.workflow_runs[0];
                 console.log(`📊 Run ${latest.id}: ${latest.status} | ${latest.conclusion}`);
                 
-                if (latest.conclusion === 'success') {
-                  console.log('🎉 TESTS PASSED! ✅ Proceed to deploy');
-                  return;  # ✅ Продолжаем FTP
+                if (latest.conclusion === "success") {
+                  console.log("🎉 TESTS PASSED! ✅ Proceed to deploy");
+                  return;
                 }
-                if (latest.conclusion === 'failure') {
-                  console.log('💥 TESTS FAILED! ❌ Abort deploy');
-                  process.exit(1);  # ✅ КРАСНЫЙ JOB!
+                if (latest.conclusion === "failure") {
+                  console.log("💥 TESTS FAILED! ❌ Abort deploy");
+                  process.exit(1);
                 }
               }
               await new Promise(r => setTimeout(r, pollInterval));
             }
-            console.log('⏰ Timeout - assume failed');
-            process.exit(1);  # ✅ Красный если не завершился
+            console.log("⏰ Timeout - assume failed");
+            process.exit(1);
+
 
       # ✅ FTP ТОЛЬКО если тесты green
       - name: Deploy FTP reg.ru  # ✅ Без изменений
