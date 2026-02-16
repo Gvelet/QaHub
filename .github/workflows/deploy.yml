@@ -7,17 +7,18 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4  # ✅ Код сайта
+      - uses: actions/checkout@v4 
       
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20.19.4'  # ✅ Твой Node
-      
+          node-version: '20.19.4' 
+          cache: 'npm'
+          
       - name: Install deps
-        run: npm ci  # ✅ Быстро
+        run: npm ci 
       
-      - name: Build PROD  # ✅ Твоя сборка без изменений
+      - name: Build PROD 
         run: |
             npx gulp clean:docs
             npx gulp html:docs  
@@ -27,10 +28,9 @@ jobs:
             npx gulp files:docs
             npx gulp js:docs
       
-      - name: List docs  # ✅ Debug
+      - name: List docs 
         run: ls -la ./docs/
       
-      # 🚀 НОВОЕ: ТРИГГЕР + ЖДЕМ ТЕСТЫ (5 мин макс)
       - name: 🔧 Trigger & Wait Tests
         uses: actions/github-script@v7
         with:
@@ -63,6 +63,11 @@ jobs:
                 const latest = runs.workflow_runs[0];
                 console.log(`📊 Run ${latest.id}: ${latest.status} | ${latest.conclusion}`);
                 
+                if (latest.status === 'in_progress') { 
+                  console.log("⏳ Tests still running...");
+                  continue;
+                }
+
                 if (latest.conclusion === "success") {
                   console.log("🎉 TESTS PASSED! ✅ Proceed to deploy");
                   return;
@@ -81,8 +86,8 @@ jobs:
             process.exit(1);
 
 
-      # ✅ FTP ТОЛЬКО если тесты green
-      - name: Deploy FTP reg.ru  # ✅ Без изменений
+      # FTP ТОЛЬКО если тесты green
+      - name: Deploy FTP reg.ru 
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
           server: ${{ secrets.FTP_SERVER }}
