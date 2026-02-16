@@ -1,10 +1,10 @@
-name: Deploy to reg.ru w/ Tests Gate
+name: Deploy to reg.ru and e2e
 on:
   push:
     branches: [ main ]
 
 jobs:
-  deploy:
+  deploy: # Деплой + сборка продового проекта
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4 
@@ -14,7 +14,7 @@ jobs:
         with:
           node-version: '20.19.4' 
           cache: 'npm'
-          
+
       - name: Install deps
         run: npm ci 
       
@@ -34,16 +34,16 @@ jobs:
       - name: 🔧 Trigger & Wait Tests
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.TESTS_PAT }}
+          github-token: ${{ secrets.TESTS_PAT }} # PAT с правами на другой repo
           script: |
-            console.log("🚀 Trigger tests...");
+            console.log("🚀 Запуск тестов...");
             const trigger = await github.rest.actions.createWorkflowDispatch({
               owner: "Gvelet",
               repo: "QASpace-AQA-tests",
               workflow_id: "playwright.yml",
               ref: "main"
             });
-            console.log("✅ Tests triggered! Waiting...");
+            console.log("✅ Тесты запущены. Подождите...");
             
             // Poll последние runs workflow'а
             const timeout = Date.now() + 5*60*1000; // 5 мин
@@ -58,7 +58,7 @@ jobs:
               });
               
               if (runs.total_count === 0) {
-                console.log("⏳ No runs yet...");
+                console.log("⏳ Пока нет результатов....");
               } else {
                 const latest = runs.workflow_runs[0];
                 console.log(`📊 Run ${latest.id}: ${latest.status} | ${latest.conclusion}`);
