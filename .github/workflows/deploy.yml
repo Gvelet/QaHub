@@ -34,56 +34,53 @@ jobs:
       - name: 🔧 Trigger & Wait Tests
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.TESTS_PAT }} # PAT с правами на другой repo
+          github-token: ${{ secrets.TESTS_PAT }}
           script: |
             console.log("🚀 Запуск тестов...");
             const trigger = await github.rest.actions.createWorkflowDispatch({
-              owner: "Gvelet",
-              repo: "QASpace-AQA-tests",
-              workflow_id: "playwright.yml",
-              ref: "main"
+              owner: "Gvelet", repo: "QASpace-AQA-tests", 
+              workflow_id: "playwright.yml", ref: "main" 
             });
-            console.log("✅ Тесты запущены. Подождите...");
             
-            // Poll последние runs workflow'а
-            const timeout = Date.now() + 5*60*1000; // 5 мин
-            const pollInterval = 30000; // 30 сек
+            const timeout = Date.now() + 5*60*1000;  // 5 мин
+            const pollInterval = 60000;  // ↑ 60 сек вместо 30
             
+            let pollCount = 0;
             while (Date.now() < timeout) {
+              pollCount++;
               const { data: runs } = await github.rest.actions.listWorkflowRuns({
-                owner: "Gvelet",
-                repo: "QASpace-AQA-tests",
-                workflow_id: "playwright.yml",
-                per_page: 1
+                owner: "Gvelet", repo: "QASpace-AQA-tests",
+                workflow_id: "playwright.yml", per_page: 1
               });
               
               if (runs.total_count === 0) {
-                console.log("⏳ Пока нет результатов....");
+                console.log(`⏳ ${pollCount}. No runs yet...`);
               } else {
                 const latest = runs.workflow_runs[0];
-                console.log(`📊 Run ${latest.id}: ${latest.status} | ${latest.conclusion}`);
                 
-                if (latest.status === 'in_progress') { 
-                  console.log("⏳ Tests still running...");
+                if (latest.status === 'queued') {
+                  console.log(`📊 ${pollCount}. Run ${latest.id}: queued`);
+                } else if (latest.status === 'in_progress' && latest.conclusion === null) {
+                  if (pollCount % 3 === 0) {  // Каждые 3 мин
+                    console.log(`⏳ ${pollCount}. Tests running... (${Math.round((Date.now() - trigger.created_at) / 60000)} min)`);
+                  }
                   continue;
-                }
-
-                if (latest.conclusion === "success") {
-                  console.log("🎉 TESTS PASSED! ✅ Proceed to deploy");
+                } else if (latest.conclusion === "success") {
+                  console.log(`🎉 ${pollCount}. ТЕСТЫ ПРОШЛИ! ✅ Приступить к deploy`);
                   return;
-                }
-                if (latest.conclusion === "failure") {
-                  console.log("💥 TESTS FAILED! ❌ Abort deploy");
+                } else if (latest.conclusion === "failure") {
+                  console.log(`💥 ${pollCount}. ТЕСТЫ НЕ ПРОШЛИ! ❌ ОТМЕНА`);
                   process.exit(1);
-                }
-                if (latest.status === "completed") {
-                  console.log("❓ Unknown conclusion:", latest.conclusion);
+                } else if (latest.status === "completed") {
+                  console.log(`❓ ${pollCount}. Завершено с неизвестным результатом: ${latest.conclusion}`);
+                  process.exit(1);
                 }
               }
               await new Promise(r => setTimeout(r, pollInterval));
             }
             console.log("⏰ Timeout - assume failed");
             process.exit(1);
+
 
 
       # FTP ТОЛЬКО если тесты green
