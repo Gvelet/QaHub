@@ -89,17 +89,6 @@ const articleTitle = h1.textContent.trim();
     }
   }
 
-  // 7) Open Graph (заполняем только пустые значения)
-  ensureOg('og:title', articleTitle);
-  ensureOg('og:description', finalDesc);
-  ensureOg('og:type', 'article');
-  ensureOg('og:url', canonicalHref);
-  ensureOg('og:site_name', 'Психолог Регина Лемешева');
-  ensureOg('og:locale', 'ru_RU');
-  ensureOg('og:image', ogImage);
-  ensureOg('og:image:width', '1200');
-  ensureOg('og:image:height', '630');
-  ensureOg('og:image:type', 'image/png');
 
   // 8) Twitter Cards
   ensureTw('twitter:title', articleTitle);

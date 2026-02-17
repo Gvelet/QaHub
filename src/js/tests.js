@@ -58,7 +58,7 @@ class Tests {
     const shortDesc = this.truncateDescription(test.briefDescription);
     return `
       <div class="tests__column">
-        <a class="tests-item" href="${test.key}">
+        <a class="tests-item test-link-${test.key}" href="${test.key}">
           <div class="tests__item-icon">
             <img src="../../img/${test.icon}" alt="${test.title}">
           </div>

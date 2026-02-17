@@ -77,7 +77,7 @@ createCardHTML(article) {
 createHomeCardHTML(article) {
   return `
     <div class="swiper-slide blog__card" id='blog__cards'>
-        <a href="blog/${article.url}" class="blog__card ">
+        <a href="blog/${article.url}" class="blog__card test-${article.url}">
         <img src="${article.image}" alt="${article.title}" class="blog__card-img" loading="lazy">
 
         <div class="blog__card-content">
