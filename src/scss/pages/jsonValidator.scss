@@ -16,7 +16,7 @@
     }
     &__wrapper {
         border-radius: 12px;
-        padding: 30px;
+        padding-bottom: 30px;
         padding-top: 0px;
         border: 1px solid #1a1a1a;
     }
@@ -124,6 +124,7 @@
         font-weight: 500;
         transition: all 0.2s ease;
         min-height: 44px;
+        text-align: center;
 
         &:hover {
             background: #4fc3f7;

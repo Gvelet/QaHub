@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Валидатор XML онлайн бесплатно | Проверка и форматирование XML | QA Space</title>
+  <meta name="description" content="Онлайн валидатор XML: проверка, форматирование, минификация, подсветка ошибок. Идеально для QA-тестеров, разработчиков. Бесплатно, мгновенно.">
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://qaspace.ru/analiz-dannyh/xml-validator">
+  <meta property="og:title" content="XML Валидатор | QA Space">
+  <meta property="og:description" content="XML валидатор, проверка XML, форматирование XML, минификация XML. Инструмент для QA-инженеров при тестировании SOAP API.">
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Валидатор XML QA Space",
+    "description": "Онлайн-инструмент для проверки, форматирования и минификации XML",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0" }
+  }
+  </script>
+  
+  <!-- Favicon -->
+  <link rel="canonical" href="https://qaspace.ru/analiz-dannyh/xml-validator">
+  <link rel="icon" href="/img/bugFavicon.ico" type="image/x-icon">
+  <link type="image/x-icon" href="/img/bugFavicon.ico" rel="shortcut icon">
+  <link type="image/x-icon" href="/img/bugFavicon.ico" rel="icon">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  @@include('../blocks/header.html')
+  
+  <main class="main">
+    <section class="xml-validator">
+      <div class="container">
+        <div class="xml-validator__inner">
+          <div class="xml-validator__content section__content-block">
+            <h1 class="xml-validator__title title">Валидатор XML</h1>
+            <p class="xml-validator__text default__content-text">
+              Онлайн-инструмент для проверки, форматирования, минификации XML с подсветкой ошибок и нумерацией строк. 
+              Идеально для QA-тестирования SOAP API, RSS/ATOM фидов и работы с XML-данными.
+            </p>
+          </div>
+          
+          <div class="xml-validator__wrapper">
+            <div class="xml-validator__panel" id="editorPanel">
+              <div class="xml-validator__lines" id="lines">
+                <div class="xml-validator__line-num">1</div>
+              </div>
+              <div class="xml-validator__editor-container">
+                <textarea class="xml-validator__editor" id="editor" placeholder="Введите или вставьте XML здесь..."></textarea>
+                <button class="copy-btn" id="copyBtn" title="Копировать">📋</button>
+              </div>
+            </div>
+            
+            <div class="xml-validator__controls">
+              <div class="xml-validator__buttons">
+                <select class="xml-validator__select" id="examples">
+                  <option value="">Добавить пример</option>
+                  <option value="valid-mini">Валидный мини-XML</option>
+                  <option value="valid-large">Валидный большой XML</option>
+                  <option value="invalid">Невалидный XML</option>
+                </select>
+                <button class="xml-validator__btn xml-validator__btn--primary" id="check">Проверить</button>
+                <button class="xml-validator__btn" id="format">Форматировать</button>
+                <button class="xml-validator__btn" id="minify">Минифицировать</button>
+                <button class="xml-validator__btn" id="exportBtn">Экспорт</button>
+                <button class="xml-validator__btn" id="clear">Очистить</button>
+                <a href="./json-validator" class="xml-validator__btn">JSON-валидатор</a>
+              </div>
+              <div class="xml-validator__status" id="status">
+                <span class="xml-validator__status-icon"></span>
+                <span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Новый контент под валидатором -->
+        <div class="xml-validator__content">
+          <section class="content-block">
+            <h2>Что такое XML и зачем валидировать</h2>
+            <p>
+              XML (eXtensible Markup Language) — это структурированный формат данных для хранения и передачи информации. 
+              Используется в SOAP веб-сервисах, RSS/ATOM фидах, конфигурационных файлах и legacy системах.
+            </p>
+            <p>
+              Невалидный XML приводит к ошибкам SOAP Fault, сбоям парсинга в тестах и отказам в обработке запросов.
+            </p>
+          </section>
+
+          <section class="content-block">
+            <h2>Типичные ошибки XML в тестировании API</h2>
+            <div class="error-examples">
+              <div class="error-example">
+                <h3>1. Незакрытый тег</h3>
+                <pre class="error-invalid">&lt;user&gt;
+  &lt;id&gt;1&lt;/id&gt;
+  &lt;name&gt;Тест&lt;/name&gt;
+&lt;/user</pre>
+                <pre class="error-valid">&lt;user&gt;
+  &lt;id&gt;1&lt;/id&gt;
+  &lt;name&gt;Тест&lt;/name&gt;
+&lt;/user&gt;</pre>
+              </div>
+              
+              <div class="error-example">
+                <h3>2. Неправильный синтаксис атрибута</h3>
+                <pre class="error-invalid">&lt;user id=1 name="test"&gt;&lt;/user&gt;</pre>
+                <pre class="error-valid">&lt;user id="1" name="test"&gt;&lt;/user&gt;</pre>
+              </div>
+              
+              <div class="error-example">
+                <h3>3. Специальные символы без экранирования</h3>
+                <pre class="error-invalid">&lt;note&gt;Пользователь &lt;b&gt;активен&lt;/b&gt;&lt;/note&gt;</pre>
+                <pre class="error-valid">&lt;note&gt;Пользователь &amp;lt;b&amp;gt;активен&amp;lt;/b&amp;gt;&lt;/note&gt;</pre>
+              </div>
+            </div>
+          </section>
+
+          <section class="content-block">
+            <h2>Как QA может использовать XML-валидатор в повседневной работе</h2>
+            <ol class="tutorial-steps">
+              <li>
+                <strong>Тестирование SOAP API:</strong> Проверяйте запросы/ответы из SoapUI или Postman перед отправкой.
+              </li>
+              <li>
+                <strong>Автоматизация тестов:</strong> Генерируйте XML-данные для Playwright/Puppeteer с правильной структурой.
+              </li>
+              <li>
+                <strong>RSS/ATOM фиды:</strong> Валидируйте контент-фиды перед публикацией или парсингом.
+              </li>
+              <li>
+                <strong>Schema validation:</strong> Комбинируйте с XSD схемами для проверки структуры XML.
+              </li>
+            </ol>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  @@include('../blocks/footer.html')
+  
+  <script src="../../js/index.bundle.js"></script>
+  <script src="/js/xmlValidator.bundle.js"></script>
+</body>
+</html>

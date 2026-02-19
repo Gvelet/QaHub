@@ -14,7 +14,8 @@ const config = {
 		blog: './src/js/blog.js',
 		article: './src/js/article.js',
 		loremIpsum: './src/js/loremIpsum.js',
-		jsonValidator: './src/js/jsonValidator.js'
+		jsonValidator: './src/js/jsonValidator.js',
+		xmlValidator: './src/js/xmlValidator.js'
 
 	},
 	output: {
